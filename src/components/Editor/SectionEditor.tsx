@@ -12,6 +12,7 @@ import type { Section, TransitionType } from '../../types/story';
 import type { StoryAction } from '../../hooks/useStory';
 import { BlockEditor } from './BlockEditor';
 import { BlockPalette } from './BlockPalette';
+import { SectionTimeline } from './SectionTimeline';
 import styles from './SectionEditor.module.css';
 
 type Props = {
@@ -178,6 +179,9 @@ export function SectionEditor({ section, dispatch }: Props) {
           ))}
         </select>
       </div>
+
+      {/* Mini-tidslinje */}
+      <SectionTimeline section={section} />
 
       {/* Block-lista med drag & drop */}
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleBlockDragEnd}>

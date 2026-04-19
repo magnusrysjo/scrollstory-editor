@@ -14,8 +14,7 @@
 }
 
 /* Innehållet dras upp 100vh för att överlappa bakgrunden (margin-top: -100vh).
-   min-height: 150vh gör att sektionen totalt är 150vh hög och ger nog scroll-distans.
-   Formel: sektionshöjd = background (100vh) + content (150vh) - negativ margin (100vh) = 150vh */
+   min-height: 150vh gör att sektionen totalt är 150vh hög och ger nog scroll-distans. */
 .content {
   position: relative;
   z-index: 1;
@@ -28,7 +27,39 @@
   justify-content: center;
 }
 
-/* Markering av vald sektion i editorn */
+/* Scroll-progress-bar */
+.progressBar {
+  position: sticky;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 5;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: rgba(232, 168, 56, 0.7);
+  width: 100%;
+  transform-origin: left;
+}
+
+/* Progress-procent, syns bara på vald sektion */
+.progressLabel {
+  position: sticky;
+  bottom: 8px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.progressLabel::after {
+  content: attr(data-value);
+}
+
+/* Markering av vald sektion */
 .sectionSelected .background {
   outline: 2px solid rgba(232, 168, 56, 0.5);
   outline-offset: -2px;
@@ -48,7 +79,7 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
   font-size: 0.55rem;
   letter-spacing: 0.15em;
   background: rgba(232, 168, 56, 0.9);

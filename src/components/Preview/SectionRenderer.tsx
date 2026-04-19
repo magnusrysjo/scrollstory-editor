@@ -1,6 +1,10 @@
+import { useRef } from 'react';
 import type { CSSProperties } from 'react';
+import { useMotionValueEvent, useScroll, motion } from 'framer-motion';
+import { useState } from 'react';
 import type { Section } from '../../types/story';
 import { BlockRenderer } from './BlockRenderer';
+import { AnimatedBlock } from './AnimatedBlock';
 import styles from './SectionRenderer.module.css';
 
 type Props = {
@@ -20,9 +24,8 @@ function buildBackgroundStyle(section: Section): CSSProperties {
       backgroundImage: bg.src ? `url(${bg.src})` : undefined,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      // Parallax via background-attachment (fungerar i sidans scroll-container)
       backgroundAttachment: bg.parallax ? 'fixed' : 'scroll',
-      backgroundColor: '#1a1a2e', // fallback om bilden inte laddats
+      backgroundColor: '#1a1a2e',
     };
   }
 
@@ -31,20 +34,50 @@ function buildBackgroundStyle(section: Section): CSSProperties {
 
 export function SectionRenderer({ section, isSelected = false }: Props) {
   const bgStyle = buildBackgroundStyle(section);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  // Spårar scroll-progress för sektionen relativt till viewport
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (v) => setProgress(v));
 
   return (
-    <section className={`${styles.section} ${isSelected ? styles.sectionSelected : ''}`}>
-      {/* Bakgrunden är sticky — stannar kvar medan sektionens innehåll scrollar förbi */}
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${isSelected ? styles.sectionSelected : ''}`}
+    >
+      {/* Sticky bakgrund */}
       <div className={styles.background} style={bgStyle} />
 
-      {/* Innehållet scrollar ovanpå bakgrunden via negativ margin */}
+      {/* Innehåll med animerade block */}
       <div className={styles.content}>
-        {section.blocks.map((block) => (
-          <BlockRenderer key={block.id} block={block} />
+        {section.blocks.map((block, i) => (
+          <AnimatedBlock key={block.id} transition={section.transition} index={i}>
+            <BlockRenderer block={block} />
+          </AnimatedBlock>
         ))}
       </div>
 
+      {/* Scroll-progress-bar längst ner i sektionen */}
+      <div className={styles.progressBar}>
+        <motion.div
+          className={styles.progressFill}
+          style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+        />
+      </div>
+
       {isSelected && <div className={styles.selectedIndicator} />}
+
+      {/* Progress-procent, syns bara på vald sektion */}
+      {isSelected && (
+        <div className={styles.progressLabel}>
+          {Math.round(progress * 100)}%
+        </div>
+      )}
     </section>
   );
 }
