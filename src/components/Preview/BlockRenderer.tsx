@@ -39,6 +39,16 @@ export function BlockRenderer({ block }: Props) {
     );
   }
 
+  if (block.type === 'image') {
+    if (!block.src) return null;
+    return (
+      <figure className={styles.imageFigure}>
+        <img src={block.src} alt={block.alt} className={styles.image} loading="lazy" />
+        {block.caption && <figcaption className={styles.figcaption}>{block.caption}</figcaption>}
+      </figure>
+    );
+  }
+
   if (block.type === 'spacer') {
     return <div className={styles.spacer} style={{ height: block.height }} />;
   }

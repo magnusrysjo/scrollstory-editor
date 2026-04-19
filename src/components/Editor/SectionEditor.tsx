@@ -1,5 +1,14 @@
 import type { Dispatch } from 'react';
-import type { Section } from '../../types/story';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
+import type { Section, TransitionType } from '../../types/story';
 import type { StoryAction } from '../../hooks/useStory';
 import { BlockEditor } from './BlockEditor';
 import { BlockPalette } from './BlockPalette';
@@ -12,7 +21,16 @@ type Props = {
 
 type BgType = 'color' | 'image';
 
+const TRANSITION_LABELS: Record<TransitionType, string> = {
+  cut: 'Direkt (cut)',
+  fade: 'Tona in (fade)',
+  'slide-up': 'Glid upp',
+  parallax: 'Parallax',
+};
+
 export function SectionEditor({ section, dispatch }: Props) {
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
+
   const bg = section.background;
   const bgType: BgType = bg.type === 'image' ? 'image' : 'color';
   const bgColor = bg.type === 'color' ? bg.value : '#1a1a2e';
@@ -39,6 +57,18 @@ export function SectionEditor({ section, dispatch }: Props) {
     dispatch({
       type: 'UPDATE_SECTION',
       payload: { sectionId: section.id, updates: { background: { ...bg, ...fields } } },
+    });
+  };
+
+  const handleBlockDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = section.blocks.findIndex((b) => b.id === active.id);
+    const newIndex = section.blocks.findIndex((b) => b.id === over.id);
+    const reordered = arrayMove(section.blocks, oldIndex, newIndex);
+    dispatch({
+      type: 'REORDER_BLOCKS',
+      payload: { sectionId: section.id, blockIds: reordered.map((b) => b.id) },
     });
   };
 
@@ -130,15 +160,38 @@ export function SectionEditor({ section, dispatch }: Props) {
         </>
       )}
 
-      {/* Block-lista */}
-      <div className={styles.blocks}>
-        {section.blocks.length === 0 && (
-          <p className={styles.emptyBlocks}>Inga block — lägg till ett nedan.</p>
-        )}
-        {section.blocks.map((block) => (
-          <BlockEditor key={block.id} block={block} sectionId={section.id} dispatch={dispatch} />
-        ))}
+      {/* Övergång */}
+      <div className={styles.field}>
+        <label className={styles.fieldLabel}>Övergång till nästa sektion</label>
+        <select
+          className={styles.select}
+          value={section.transition}
+          onChange={(e) =>
+            dispatch({
+              type: 'UPDATE_SECTION',
+              payload: { sectionId: section.id, updates: { transition: e.target.value as TransitionType } },
+            })
+          }
+        >
+          {(Object.keys(TRANSITION_LABELS) as TransitionType[]).map((t) => (
+            <option key={t} value={t}>{TRANSITION_LABELS[t]}</option>
+          ))}
+        </select>
       </div>
+
+      {/* Block-lista med drag & drop */}
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleBlockDragEnd}>
+        <SortableContext items={section.blocks.map((b) => b.id)} strategy={verticalListSortingStrategy}>
+          <div className={styles.blocks}>
+            {section.blocks.length === 0 && (
+              <p className={styles.emptyBlocks}>Inga block — lägg till ett nedan.</p>
+            )}
+            {section.blocks.map((block) => (
+              <BlockEditor key={block.id} block={block} sectionId={section.id} dispatch={dispatch} />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
 
       {/* Lägg till block */}
       <BlockPalette sectionId={section.id} dispatch={dispatch} />

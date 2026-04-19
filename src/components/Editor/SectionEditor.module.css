@@ -138,6 +138,25 @@
   background-position: center;
 }
 
+/* Övergång-select */
+
+.select {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #a0a0b8;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.73rem;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: rgba(232, 168, 56, 0.4);
+}
+
 /* Block-lista */
 
 .blocks {

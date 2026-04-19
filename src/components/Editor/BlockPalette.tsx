@@ -24,6 +24,16 @@ export function BlockPalette({ sectionId, dispatch }: Props) {
     });
   };
 
+  const addImage = () => {
+    dispatch({
+      type: 'ADD_BLOCK',
+      payload: {
+        sectionId,
+        block: { type: 'image', id: generateId(), src: '', alt: '' },
+      },
+    });
+  };
+
   const addSpacer = () => {
     dispatch({
       type: 'ADD_BLOCK',
@@ -41,6 +51,10 @@ export function BlockPalette({ sectionId, dispatch }: Props) {
         <button className={styles.btn} onClick={addText}>
           <span className={styles.icon}>T</span>
           Text
+        </button>
+        <button className={styles.btn} onClick={addImage}>
+          <span className={styles.icon}>▣</span>
+          Bild
         </button>
         <button className={styles.btn} onClick={addSpacer}>
           <span className={styles.icon}>↕</span>
