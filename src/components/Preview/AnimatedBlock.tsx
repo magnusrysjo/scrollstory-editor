@@ -60,7 +60,7 @@ export function AnimatedBlock({ children, transition, index }: Props) {
       viewport={{
         // root pekar på preview-panelen, inte window
         root: rootRef,
-        once: true,
+        once: false,
         amount: 0.15,
       }}
       variants={variants}
