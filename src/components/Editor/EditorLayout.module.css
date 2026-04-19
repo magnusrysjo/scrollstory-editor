@@ -1,0 +1,71 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #0f0f1e;
+}
+
+/* === Sidebar === */
+
+.sidebar {
+  width: 350px;
+  flex-shrink: 0;
+  background: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebarHeader {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.appLabel {
+  display: block;
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #e8a838;
+  margin-bottom: 0.4rem;
+}
+
+.storyTitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #e8e8e8;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emptyHint {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.emptyHint p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #4a4a6a;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* === Preview area === */
+
+.previewArea {
+  flex: 1;
+  overflow-y: auto;
+  background: #f8f6f1;
+  position: relative;
+}

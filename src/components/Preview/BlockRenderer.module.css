@@ -1,0 +1,80 @@
+/* Gemensamt: all text är vit/ljus och läsbar mot mörka bakgrunder */
+
+.heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.subheading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1rem;
+}
+
+.body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem;
+  max-width: 60ch;
+}
+
+.quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.caption {
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Alignment */
+
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignCenter.body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignRight.body {
+  margin-left: auto;
+}
+
+/* Spacer */
+
+.spacer {
+  display: block;
+  flex-shrink: 0;
+}

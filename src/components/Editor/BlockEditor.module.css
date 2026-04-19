@@ -1,0 +1,125 @@
+.block {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blockHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blockType {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: #5a5a7a;
+  flex: 1;
+}
+
+.spacerValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #e8a838;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: #4a4a6a;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 1px 4px;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.removeBtn:hover {
+  color: #e85858;
+  background: rgba(232, 88, 88, 0.1);
+}
+
+.textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #d0d0e8;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding: 0.5rem;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(232, 168, 56, 0.4);
+}
+
+.styleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #a0a0b8;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.73rem;
+  padding: 0.3rem 0.4rem;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: rgba(232, 168, 56, 0.4);
+}
+
+.alignGroup {
+  display: flex;
+  gap: 2px;
+}
+
+.alignBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #5a5a7a;
+  font-size: 0.75rem;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.alignBtn:hover {
+  color: #a0a0b8;
+}
+
+.alignBtnActive {
+  background: rgba(232, 168, 56, 0.15);
+  border-color: rgba(232, 168, 56, 0.35);
+  color: #e8a838;
+}
+
+.slider {
+  width: 100%;
+  accent-color: #e8a838;
+  cursor: pointer;
+}
