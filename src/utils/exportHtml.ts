@@ -33,12 +33,22 @@ function renderBlock(block: ContentBlock): string {
   return '';
 }
 
+function renderBackground(bg: BackgroundLayer): string {
+  if (bg.type === 'video' && bg.src) {
+    return `<div class="section-bg">
+      <video class="section-video" src="${bg.src}" autoplay muted playsinline${bg.loop ? ' loop' : ''}></video>
+    </div>`;
+  }
+  const style = renderBgStyle(bg);
+  return `<div class="section-bg" style="${style}"></div>`;
+}
+
 function renderSection(section: Section): string {
-  const bgStyle = renderBgStyle(section.background);
+  const bg = renderBackground(section.background);
   const blocks = section.blocks.map(renderBlock).join('\n');
   return `
   <section class="section">
-    <div class="section-bg" style="${bgStyle}"></div>
+    ${bg}
     <div class="section-content">
       ${blocks}
     </div>
@@ -65,7 +75,8 @@ export function exportStoryHtml(story: Story): void {
     body { font-family: 'Inter', system-ui, sans-serif; background: #f8f6f1; -webkit-font-smoothing: antialiased; }
 
     .section { position: relative; }
-    .section-bg { position: sticky; top: 0; height: 100vh; width: 100%; z-index: 0; }
+    .section-bg { position: sticky; top: 0; height: 100vh; width: 100%; z-index: 0; overflow: hidden; background-color: #1a1a2e; }
+    .section-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .section-content { position: relative; z-index: 1; margin-top: -100vh; min-height: 150vh; padding: 12vh 8vw 8vh; display: flex; flex-direction: column; justify-content: center; }
 
     .block-heading { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
