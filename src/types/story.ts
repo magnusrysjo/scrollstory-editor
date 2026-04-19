@@ -24,10 +24,14 @@ export type MapMarker = {
   label?: string;
 };
 
+export type ChartDataRow = Record<string, string | number>;
+
 export type ContentBlock =
   | { type: 'text'; id: string; content: string; style: TextStyle }
   | { type: 'image'; id: string; src: string; alt: string; caption?: string }
-  | { type: 'chart'; id: string; chartType: string; data: unknown }
+  | { type: 'quote'; id: string; content: string; attribution?: string }
+  | { type: 'chart'; id: string; chartType: 'bar' | 'line' | 'area'; data: ChartDataRow[]; dataKey: string; xKey: string; label?: string }
+  | { type: 'map'; id: string; center: [number, number]; zoom: number; markers?: MapMarker[] }
   | { type: 'spacer'; id: string; height: number };
 
 export type TransitionType = 'fade' | 'slide-up' | 'parallax' | 'cut';
@@ -46,7 +50,6 @@ export type StoryTheme = {
   colorText: string;
 };
 
-// Fält som kan uppdateras på ett ContentBlock (utan type/id)
 export type ContentBlockFields = {
   content?: string;
   style?: TextStyle;
@@ -54,8 +57,15 @@ export type ContentBlockFields = {
   src?: string;
   alt?: string;
   caption?: string;
-  chartType?: string;
-  data?: unknown;
+  attribution?: string;
+  chartType?: 'bar' | 'line' | 'area';
+  data?: ChartDataRow[];
+  dataKey?: string;
+  xKey?: string;
+  label?: string;
+  center?: [number, number];
+  zoom?: number;
+  markers?: MapMarker[];
   parallax?: boolean;
   loop?: boolean;
 };

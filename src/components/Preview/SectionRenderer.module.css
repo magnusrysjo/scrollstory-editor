@@ -27,6 +27,16 @@
   justify-content: center;
 }
 
+/* Video-bakgrund */
+
+.videoBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Scroll-progress-bar */
 .progressBar {
   position: sticky;

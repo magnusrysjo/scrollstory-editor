@@ -37,8 +37,11 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
   const scrollContainer = useScrollContainer();
+  const bg = section.background;
+  const isVideo = bg.type === 'video';
+  const videoSrc = bg.type === 'video' ? bg.src : '';
+  const videoLoop = bg.type === 'video' ? bg.loop : true;
 
-  // Spårar scroll-progress relativt till preview-panelen (inte window)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     container: scrollContainer ? { current: scrollContainer } : undefined,
@@ -53,7 +56,20 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
       className={`${styles.section} ${isSelected ? styles.sectionSelected : ''}`}
     >
       {/* Sticky bakgrund */}
-      <div className={styles.background} style={bgStyle} />
+      {isVideo && videoSrc ? (
+        <div className={styles.background}>
+          <video
+            className={styles.videoBg}
+            src={videoSrc}
+            autoPlay
+            muted
+            playsInline
+            loop={videoLoop}
+          />
+        </div>
+      ) : (
+        <div className={styles.background} style={bgStyle} />
+      )}
 
       {/* Innehåll med animerade block */}
       <div className={styles.content}>

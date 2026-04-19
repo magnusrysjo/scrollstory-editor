@@ -20,7 +20,7 @@ type Props = {
   dispatch: Dispatch<StoryAction>;
 };
 
-type BgType = 'color' | 'image';
+type BgType = 'color' | 'image' | 'video';
 
 const TRANSITION_LABELS: Record<TransitionType, string> = {
   cut: 'Direkt (cut)',
@@ -33,32 +33,31 @@ export function SectionEditor({ section, dispatch }: Props) {
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
 
   const bg = section.background;
-  const bgType: BgType = bg.type === 'image' ? 'image' : 'color';
+  const bgType: BgType = bg.type === 'image' ? 'image' : bg.type === 'video' ? 'video' : 'color';
   const bgColor = bg.type === 'color' ? bg.value : '#1a1a2e';
-  const bgSrc = bg.type === 'image' ? bg.src : '';
+  const bgSrc = bg.type === 'image' ? bg.src : bg.type === 'video' ? bg.src : '';
   const bgAlt = bg.type === 'image' ? bg.alt : '';
   const bgParallax = bg.type === 'image' ? bg.parallax : false;
+  const bgLoop = bg.type === 'video' ? bg.loop : true;
 
   const switchType = (type: BgType) => {
     if (type === 'color') {
-      dispatch({
-        type: 'UPDATE_SECTION',
-        payload: { sectionId: section.id, updates: { background: { type: 'color', value: bgColor } } },
-      });
+      dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { type: 'color', value: bgColor } } } });
+    } else if (type === 'image') {
+      dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { type: 'image', src: bgSrc, alt: bgAlt, parallax: bgParallax } } } });
     } else {
-      dispatch({
-        type: 'UPDATE_SECTION',
-        payload: { sectionId: section.id, updates: { background: { type: 'image', src: bgSrc, alt: bgAlt, parallax: bgParallax } } },
-      });
+      dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { type: 'video', src: bgSrc, loop: bgLoop } } } });
     }
   };
 
   const updateImage = (fields: Partial<{ src: string; alt: string; parallax: boolean }>) => {
     if (bg.type !== 'image') return;
-    dispatch({
-      type: 'UPDATE_SECTION',
-      payload: { sectionId: section.id, updates: { background: { ...bg, ...fields } } },
-    });
+    dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { ...bg, ...fields } } } });
+  };
+
+  const updateVideo = (fields: Partial<{ src: string; loop: boolean }>) => {
+    if (bg.type !== 'video') return;
+    dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { ...bg, ...fields } } } });
   };
 
   const handleBlockDragEnd = (event: DragEndEvent) => {
@@ -67,10 +66,7 @@ export function SectionEditor({ section, dispatch }: Props) {
     const oldIndex = section.blocks.findIndex((b) => b.id === active.id);
     const newIndex = section.blocks.findIndex((b) => b.id === over.id);
     const reordered = arrayMove(section.blocks, oldIndex, newIndex);
-    dispatch({
-      type: 'REORDER_BLOCKS',
-      payload: { sectionId: section.id, blockIds: reordered.map((b) => b.id) },
-    });
+    dispatch({ type: 'REORDER_BLOCKS', payload: { sectionId: section.id, blockIds: reordered.map((b) => b.id) } });
   };
 
   return (
@@ -79,26 +75,22 @@ export function SectionEditor({ section, dispatch }: Props) {
         <span className={styles.label}>REDIGERA SEKTION</span>
       </div>
 
-      {/* Typ-toggle: Färg | Bild */}
+      {/* Bakgrundstyp-toggle */}
       <div className={styles.field}>
         <label className={styles.fieldLabel}>Bakgrundstyp</label>
         <div className={styles.typeToggle}>
-          <button
-            className={`${styles.typeBtn} ${bgType === 'color' ? styles.typeBtnActive : ''}`}
-            onClick={() => switchType('color')}
-          >
-            Färg
-          </button>
-          <button
-            className={`${styles.typeBtn} ${bgType === 'image' ? styles.typeBtnActive : ''}`}
-            onClick={() => switchType('image')}
-          >
-            Bild
-          </button>
+          {(['color', 'image', 'video'] as BgType[]).map((t) => (
+            <button
+              key={t}
+              className={`${styles.typeBtn} ${bgType === t ? styles.typeBtnActive : ''}`}
+              onClick={() => switchType(t)}
+            >
+              {t === 'color' ? 'Färg' : t === 'image' ? 'Bild' : 'Video'}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Färgväljare */}
       {bgType === 'color' && (
         <div className={styles.field}>
           <label className={styles.fieldLabel}>Bakgrundsfärg</label>
@@ -108,10 +100,7 @@ export function SectionEditor({ section, dispatch }: Props) {
               className={styles.colorInput}
               value={bgColor}
               onChange={(e) =>
-                dispatch({
-                  type: 'UPDATE_SECTION',
-                  payload: { sectionId: section.id, updates: { background: { type: 'color', value: e.target.value } } },
-                })
+                dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { background: { type: 'color', value: e.target.value } } } })
               }
             />
             <span className={styles.colorValue}>{bgColor.toUpperCase()}</span>
@@ -119,45 +108,38 @@ export function SectionEditor({ section, dispatch }: Props) {
         </div>
       )}
 
-      {/* Bildinställningar */}
       {bgType === 'image' && (
         <>
           <div className={styles.field}>
             <label className={styles.fieldLabel}>Bild-URL</label>
-            <input
-              type="url"
-              className={styles.urlInput}
-              placeholder="https://example.com/bild.jpg"
-              value={bgSrc}
-              onChange={(e) => updateImage({ src: e.target.value })}
-            />
+            <input type="url" className={styles.urlInput} placeholder="https://example.com/bild.jpg" value={bgSrc} onChange={(e) => updateImage({ src: e.target.value })} />
           </div>
           <div className={styles.field}>
             <label className={styles.fieldLabel}>Alt-text</label>
-            <input
-              type="text"
-              className={styles.urlInput}
-              placeholder="Beskriv bilden..."
-              value={bgAlt}
-              onChange={(e) => updateImage({ alt: e.target.value })}
-            />
+            <input type="text" className={styles.urlInput} placeholder="Beskriv bilden..." value={bgAlt} onChange={(e) => updateImage({ alt: e.target.value })} />
           </div>
           <div className={styles.field}>
             <label className={styles.checkboxRow}>
-              <input
-                type="checkbox"
-                className={styles.checkbox}
-                checked={bgParallax}
-                onChange={(e) => updateImage({ parallax: e.target.checked })}
-              />
+              <input type="checkbox" className={styles.checkbox} checked={bgParallax} onChange={(e) => updateImage({ parallax: e.target.checked })} />
               <span className={styles.fieldLabel} style={{ marginBottom: 0 }}>Parallax-effekt</span>
             </label>
           </div>
-          {bgSrc && (
-            <div className={styles.field}>
-              <div className={styles.imagePreview} style={{ backgroundImage: `url(${bgSrc})` }} />
-            </div>
-          )}
+          {bgSrc && <div className={styles.field}><div className={styles.imagePreview} style={{ backgroundImage: `url(${bgSrc})` }} /></div>}
+        </>
+      )}
+
+      {bgType === 'video' && (
+        <>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Video-URL (.mp4)</label>
+            <input type="url" className={styles.urlInput} placeholder="https://example.com/video.mp4" value={bgSrc} onChange={(e) => updateVideo({ src: e.target.value })} />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.checkboxRow}>
+              <input type="checkbox" className={styles.checkbox} checked={bgLoop} onChange={(e) => updateVideo({ loop: e.target.checked })} />
+              <span className={styles.fieldLabel} style={{ marginBottom: 0 }}>Loopa videon</span>
+            </label>
+          </div>
         </>
       )}
 
@@ -168,10 +150,7 @@ export function SectionEditor({ section, dispatch }: Props) {
           className={styles.select}
           value={section.transition}
           onChange={(e) =>
-            dispatch({
-              type: 'UPDATE_SECTION',
-              payload: { sectionId: section.id, updates: { transition: e.target.value as TransitionType } },
-            })
+            dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { transition: e.target.value as TransitionType } } })
           }
         >
           {(Object.keys(TRANSITION_LABELS) as TransitionType[]).map((t) => (
@@ -197,7 +176,6 @@ export function SectionEditor({ section, dispatch }: Props) {
         </SortableContext>
       </DndContext>
 
-      {/* Lägg till block */}
       <BlockPalette sectionId={section.id} dispatch={dispatch} />
     </div>
   );

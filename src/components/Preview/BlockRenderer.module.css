@@ -72,6 +72,43 @@
   margin-left: auto;
 }
 
+/* Quote/callout */
+
+.quoteBlock {
+  margin: 1rem 0 1.5rem;
+  padding: 1.5rem 2rem;
+  border-left: 4px solid rgba(232, 168, 56, 0.7);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0 6px 6px 0;
+}
+
+.quoteText {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 0.75rem;
+}
+
+.quoteAttribution {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(232, 168, 56, 0.8);
+  font-style: normal;
+}
+
+/* Laddnings-placeholder */
+
+.blockLoading {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  text-align: center;
+}
+
 /* Bild */
 
 .imageFigure {
