@@ -61,6 +61,61 @@
   line-height: 1.6;
 }
 
+/* === Toolbar === */
+
+.toolbar {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.autoSave {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: #3a6a3a;
+  flex: 1;
+}
+
+.saveMsg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: #e8a838;
+  flex: 1;
+}
+
+.toolbarBtns {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.toolBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #7a7a9a;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.toolBtn:hover {
+  background: rgba(232, 168, 56, 0.1);
+  border-color: rgba(232, 168, 56, 0.3);
+  color: #e8a838;
+}
+
+.toolBtnDanger:hover {
+  background: rgba(232, 88, 88, 0.1);
+  border-color: rgba(232, 88, 88, 0.3);
+  color: #e85858;
+}
+
 /* === Preview area === */
 
 .previewArea {
