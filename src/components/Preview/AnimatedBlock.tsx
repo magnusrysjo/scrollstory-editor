@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { Variants, Transition } from 'framer-motion';
 import type { TransitionType } from '../../types/story';
+import { useScrollContainer } from './ScrollContainerContext';
 
 type Props = {
   children: React.ReactNode;
@@ -36,7 +37,20 @@ const VARIANT_MAP: Record<TransitionType, Variants> = {
 
 export function AnimatedBlock({ children, transition, index }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '0px 0px -80px 0px' });
+  const root = useScrollContainer();
+
+  // Använd preview-panelen som root så att Intersection Observer
+  // reagerar på scroll i rätt container (inte window)
+  // useInView vill ha en RefObject som root, inte ett element direkt
+  const rootRef = useRef<HTMLElement | null>(null);
+  if (root && rootRef.current !== root) rootRef.current = root;
+
+  const inView = useInView(ref, {
+    once: true,
+    margin: '0px 0px -80px 0px',
+    root: root ? rootRef : undefined,
+  });
+
   const variants = VARIANT_MAP[transition] ?? VARIANT_MAP.fade;
 
   return (

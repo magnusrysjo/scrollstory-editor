@@ -1,10 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { useMotionValueEvent, useScroll, motion } from 'framer-motion';
-import { useState } from 'react';
 import type { Section } from '../../types/story';
 import { BlockRenderer } from './BlockRenderer';
 import { AnimatedBlock } from './AnimatedBlock';
+import { useScrollContainer } from './ScrollContainerContext';
 import styles from './SectionRenderer.module.css';
 
 type Props = {
@@ -36,10 +36,12 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
   const bgStyle = buildBackgroundStyle(section);
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const scrollContainer = useScrollContainer();
 
-  // Spårar scroll-progress för sektionen relativt till viewport
+  // Spårar scroll-progress relativt till preview-panelen (inte window)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
+    container: scrollContainer ? { current: scrollContainer } : undefined,
     offset: ['start end', 'end start'],
   });
 
