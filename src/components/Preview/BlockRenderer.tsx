@@ -29,6 +29,7 @@ function getAlignClass(alignment: TextStyle['alignment']): string {
 export function BlockRenderer({ block }: Props) {
   if (block.type === 'text') {
     const inlineStyle: CSSProperties = {};
+    inlineStyle.whiteSpace = 'pre-wrap';
     if (block.style.color) inlineStyle.color = block.style.color;
     if (typeof block.style.fontSize === 'number') inlineStyle.fontSize = `${block.style.fontSize}rem`;
     return (

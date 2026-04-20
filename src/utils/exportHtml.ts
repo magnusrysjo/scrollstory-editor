@@ -15,7 +15,7 @@ function renderBlock(block: ContentBlock): string {
       : block.style.variant === 'subheading' ? 'h3'
       : 'p';
     const cls = `block-${block.style.variant} align-${block.style.alignment}`;
-    const inlineStyles: string[] = [];
+    const inlineStyles: string[] = ['white-space:pre-wrap'];
     if (block.style.color) inlineStyles.push(`color:${block.style.color}`);
     if (block.style.fontSize) inlineStyles.push(`font-size:${block.style.fontSize}rem`);
     const styleAttr = inlineStyles.length ? ` style="${inlineStyles.join(';')}"` : '';
