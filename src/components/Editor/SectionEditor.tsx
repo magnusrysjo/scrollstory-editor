@@ -143,6 +143,36 @@ export function SectionEditor({ section, dispatch }: Props) {
         </>
       )}
 
+      {/* Textfärg per sektion */}
+      <div className={styles.field}>
+        <label className={styles.fieldLabel}>Textfärg (denna sektion)</label>
+        <div className={styles.colorRow}>
+          <input
+            type="color"
+            className={styles.colorInput}
+            value={section.colorText ?? '#ffffff'}
+            onChange={(e) =>
+              dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { colorText: e.target.value } } })
+            }
+          />
+          <span className={styles.colorValue}>{(section.colorText ?? '#ffffff').toUpperCase()}</span>
+          {section.colorText && (
+            <button
+              className={styles.resetColorBtn}
+              onClick={() =>
+                dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { colorText: undefined } } })
+              }
+              title="Återställ till temafärg"
+            >
+              ↺ Tema
+            </button>
+          )}
+        </div>
+        {!section.colorText && (
+          <p className={styles.colorHint}>Använder temats globala textfärg</p>
+        )}
+      </div>
+
       {/* Övergång */}
       <div className={styles.field}>
         <label className={styles.fieldLabel}>Övergång till nästa sektion</label>

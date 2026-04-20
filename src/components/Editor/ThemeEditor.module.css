@@ -121,3 +121,50 @@
   color: #4a4a6a;
   line-height: 1.4;
 }
+
+/* Eget typsnitt */
+
+.customRow {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.customInput {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(232, 168, 56, 0.25);
+  border-radius: 4px;
+  color: #d0d0e8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0.35rem 0.5rem;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.customInput:focus {
+  outline: none;
+  border-color: rgba(232, 168, 56, 0.55);
+}
+
+.customInput::placeholder {
+  color: #4a4a6a;
+}
+
+.loadBtn {
+  background: rgba(232, 168, 56, 0.12);
+  border: 1px solid rgba(232, 168, 56, 0.3);
+  border-radius: 4px;
+  color: #e8a838;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.loadBtn:hover {
+  background: rgba(232, 168, 56, 0.22);
+}

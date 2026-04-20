@@ -71,8 +71,11 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
         <div className={styles.background} style={bgStyle} />
       )}
 
-      {/* Innehåll med animerade block */}
-      <div className={styles.content}>
+      {/* Innehåll med animerade block — eventuell per-sektion textfärgoverride */}
+      <div
+        className={styles.content}
+        style={section.colorText ? ({ '--color-text': section.colorText } as CSSProperties) : undefined}
+      >
         {section.blocks.map((block, i) => (
           <AnimatedBlock key={block.id} transition={section.transition} index={i}>
             <BlockRenderer block={block} />

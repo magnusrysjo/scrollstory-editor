@@ -138,6 +138,34 @@
   background-position: center;
 }
 
+/* Textfärg per sektion */
+
+.resetColorBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #7a7a9a;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.resetColorBtn:hover {
+  color: #e8a838;
+  border-color: rgba(232, 168, 56, 0.35);
+}
+
+.colorHint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: #4a4a6a;
+  margin-top: 0.3rem;
+  line-height: 1.4;
+}
+
 /* Övergång-select */
 
 .select {

@@ -46,3 +46,37 @@ export function googleFontsUrl(fonts: FontOption[]): string {
 export function findFont(value: string, list: FontOption[]): FontOption | undefined {
   return list.find((f) => f.value === value);
 }
+
+// Returnerar true om värdet INTE finns i listan (dvs. eget typsnitt)
+export function isCustomFont(value: string, list: FontOption[]): boolean {
+  return !list.some((f) => f.value === value);
+}
+
+// Extraherar visningsnamnet ur en CSS-font-family-sträng, t.ex. "'Oswald', sans-serif" → "Oswald"
+export function customFontDisplayName(value: string): string {
+  const m = value.match(/^'([^']+)'/);
+  return m ? m[1] : value;
+}
+
+// Laddar ett eget Google Fonts-typsnitt och returnerar CSS-värdet
+export function loadCustomFont(familyName: string): string {
+  const trimmed = familyName.trim();
+  if (!trimmed) return '';
+  const gfFamily = trimmed.replace(/\s+/g, '+');
+  const id = `gf-custom-${gfFamily}`;
+  if (!document.getElementById(id)) {
+    const link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = `https://fonts.googleapis.com/css2?family=${gfFamily}:ital,wght@0,400;0,700;1,400&display=swap`;
+    document.head.appendChild(link);
+  }
+  return `'${trimmed}', sans-serif`;
+}
+
+// Bygger GF-URL för ett eget typsnitt (för HTML-export)
+export function customFontUrl(cssValue: string): string {
+  const name = customFontDisplayName(cssValue);
+  const gfFamily = name.replace(/\s+/g, '+');
+  return `https://fonts.googleapis.com/css2?family=${gfFamily}:ital,wght@0,400;0,700;1,400&display=swap`;
+}

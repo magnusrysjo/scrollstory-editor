@@ -10,6 +10,7 @@ export type Section = {
   background: BackgroundLayer;
   blocks: ContentBlock[];
   transition: TransitionType;
+  colorText?: string; // overridar theme.colorText för denna sektion
 };
 
 export type BackgroundLayer =

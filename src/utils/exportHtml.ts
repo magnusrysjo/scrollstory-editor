@@ -1,5 +1,5 @@
 import type { Story, Section, ContentBlock, BackgroundLayer, FontSize } from '../types/story';
-import { HEADING_FONTS, BODY_FONTS, googleFontsUrl, findFont } from './fonts';
+import { HEADING_FONTS, BODY_FONTS, googleFontsUrl, findFont, isCustomFont, customFontUrl } from './fonts';
 
 const FONT_SIZE_MAP: Record<FontSize, string> = {
   xs: '0.7rem', sm: '0.875rem', base: '', lg: '1.3rem',
@@ -56,10 +56,11 @@ function renderBackground(bg: BackgroundLayer): string {
 function renderSection(section: Section): string {
   const bg = renderBackground(section.background);
   const blocks = section.blocks.map(renderBlock).join('\n');
+  const colorStyle = section.colorText ? ` style="--color-text:${section.colorText}"` : '';
   return `
   <section class="section">
     ${bg}
-    <div class="section-content">
+    <div class="section-content"${colorStyle}>
       ${blocks}
     </div>
   </section>`;
@@ -73,12 +74,22 @@ export function exportStoryHtml(story: Story): void {
   const { theme } = story;
   const sections = story.sections.map(renderSection).join('\n');
 
-  // Samla ihop alla använda Google Fonts
-  const usedFonts = [
+  // Samla ihop alla använda Google Fonts (både curerade och egna)
+  const knownFonts = [
     findFont(theme.fontHeading, HEADING_FONTS),
     findFont(theme.fontBody, BODY_FONTS),
   ].filter(Boolean) as import('./fonts').FontOption[];
-  const fontsUrl = googleFontsUrl(usedFonts);
+
+  const fontLinks: string[] = [];
+  if (knownFonts.length > 0) {
+    fontLinks.push(`  <link href="${googleFontsUrl(knownFonts)}" rel="stylesheet">`);
+  }
+  if (isCustomFont(theme.fontHeading, HEADING_FONTS)) {
+    fontLinks.push(`  <link href="${customFontUrl(theme.fontHeading)}" rel="stylesheet">`);
+  }
+  if (isCustomFont(theme.fontBody, BODY_FONTS)) {
+    fontLinks.push(`  <link href="${customFontUrl(theme.fontBody)}" rel="stylesheet">`);
+  }
 
   const html = `<!DOCTYPE html>
 <html lang="sv">
@@ -88,7 +99,7 @@ export function exportStoryHtml(story: Story): void {
   <title>${escHtml(story.title)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="${fontsUrl}" rel="stylesheet">
+${fontLinks.join('\n')}
   <style>
     :root {
       --font-heading: ${theme.fontHeading};
