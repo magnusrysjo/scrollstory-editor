@@ -1,5 +1,5 @@
 import type { Dispatch } from 'react';
-import type { ContentBlock, TextStyle, ContentBlockFields } from '../../types/story';
+import type { ContentBlock, TextStyle, ContentBlockFields, FontSize } from '../../types/story';
 import type { StoryAction } from '../../hooks/useStory';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -15,6 +15,9 @@ const VARIANT_LABELS: Record<TextStyle['variant'], string> = {
   heading: 'Rubrik', subheading: 'Underrubrik', body: 'Brödtext', quote: 'Citat', caption: 'Bildtext',
 };
 const ALIGNMENT_LABELS: Record<TextStyle['alignment'], string> = { left: '←', center: '↔', right: '→' };
+const FONT_SIZE_LABELS: Record<FontSize, string> = {
+  xs: 'XS', sm: 'S', base: 'M', lg: 'L', xl: 'XL', '2xl': '2XL', '3xl': '3XL',
+};
 
 export function BlockEditor({ block, sectionId, dispatch }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: block.id });
@@ -57,6 +60,15 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
               </button>
             ))}
           </div>
+        </div>
+        <div className={styles.sizeRow}>
+          {(Object.keys(FONT_SIZE_LABELS) as FontSize[]).map((s) => (
+            <button key={s}
+              className={`${styles.sizeBtn} ${(block.style.fontSize ?? 'base') === s ? styles.sizeBtnActive : ''}`}
+              onClick={() => update({ style: { ...block.style, fontSize: s } })}>
+              {FONT_SIZE_LABELS[s]}
+            </button>
+          ))}
         </div>
       </>
     );

@@ -4,6 +4,7 @@ import { SectionList } from './SectionList';
 import { SectionEditor } from './SectionEditor';
 import { PreviewPane } from '../Preview/PreviewPane';
 import { ScrollContainerContext } from '../Preview/ScrollContainerContext';
+import { ThemeEditor } from './ThemeEditor';
 import { exportStoryJson, importStoryJson } from '../../utils/exportJson';
 import { exportStoryHtml } from '../../utils/exportHtml';
 import { clearStory } from '../../utils/storage';
@@ -81,9 +82,12 @@ export function EditorLayout() {
         )}
 
         {!selectedSection && (
-          <div className={styles.emptyHint}>
-            <p>Välj en sektion för att redigera den.</p>
-          </div>
+          <>
+            <div className={styles.emptyHint}>
+              <p>Välj en sektion för att redigera den,<br />eller justera temat nedan.</p>
+            </div>
+            <ThemeEditor theme={story.theme} dispatch={dispatch} />
+          </>
         )}
 
         {/* Toolbar längst ner */}

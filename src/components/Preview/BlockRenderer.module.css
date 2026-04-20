@@ -1,40 +1,40 @@
-/* Gemensamt: all text är vit/ljus och läsbar mot mörka bakgrunder */
+/* Alla typsnitt och färger läses från CSS custom properties satta av PreviewPane */
 
 .heading {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
-  color: #ffffff;
+  color: var(--color-text, #ffffff);
   margin: 0 0 1.25rem;
   letter-spacing: -0.02em;
 }
 
 .subheading {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   font-weight: 400;
   font-style: italic;
   line-height: 1.3;
-  color: rgba(255, 255, 255, 0.85);
+  color: color-mix(in srgb, var(--color-text, #fff) 85%, transparent);
   margin: 0 0 1rem;
 }
 
 .body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--color-text, #fff) 80%, transparent);
   margin: 0 0 1rem;
   max-width: 60ch;
 }
 
 .quote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-style: italic;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--color-text, #fff) 90%, transparent);
   margin: 1rem 0;
   padding-left: 1.5rem;
   border-left: 3px solid rgba(255, 255, 255, 0.3);
@@ -44,50 +44,36 @@
   font-family: 'JetBrains Mono', 'Menlo', monospace;
   font-size: 0.75rem;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--color-text, #fff) 50%, transparent);
   margin: 0 0 0.75rem;
   text-transform: uppercase;
 }
 
 /* Alignment */
 
-.alignLeft {
-  text-align: left;
-}
+.alignLeft   { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight  { text-align: right; }
 
-.alignCenter {
-  text-align: center;
-}
+.alignCenter.body { margin-left: auto; margin-right: auto; }
+.alignRight.body  { margin-left: auto; }
 
-.alignCenter.body {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.alignRight {
-  text-align: right;
-}
-
-.alignRight.body {
-  margin-left: auto;
-}
-
-/* Quote/callout */
+/* Quote/callout-block */
 
 .quoteBlock {
   margin: 1rem 0 1.5rem;
   padding: 1.5rem 2rem;
-  border-left: 4px solid rgba(232, 168, 56, 0.7);
+  border-left: 4px solid var(--color-primary, rgba(232, 168, 56, 0.7));
   background: rgba(0, 0, 0, 0.25);
   border-radius: 0 6px 6px 0;
 }
 
 .quoteText {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   font-style: italic;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.92);
+  color: color-mix(in srgb, var(--color-text, #fff) 92%, transparent);
   margin: 0 0 0.75rem;
 }
 
@@ -95,7 +81,7 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
-  color: rgba(232, 168, 56, 0.8);
+  color: var(--color-primary, rgba(232, 168, 56, 0.8));
   font-style: normal;
 }
 
@@ -126,7 +112,7 @@
 .figcaption {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--color-text, #fff) 50%, transparent);
   margin-top: 0.5rem;
   letter-spacing: 0.03em;
 }

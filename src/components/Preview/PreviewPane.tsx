@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { Story } from '../../types/story';
 import { SectionRenderer } from './SectionRenderer';
 import styles from './PreviewPane.module.css';
@@ -8,6 +9,14 @@ type Props = {
 };
 
 export function PreviewPane({ story, selectedSectionId }: Props) {
+  // Tema-variabler sprids till alla block via CSS custom properties
+  const themeVars: CSSProperties = {
+    '--font-heading': story.theme.fontHeading,
+    '--font-body': story.theme.fontBody,
+    '--color-primary': story.theme.colorPrimary,
+    '--color-text': story.theme.colorText,
+  } as CSSProperties;
+
   return (
     <div className={styles.pane}>
       <div className={styles.previewHeader}>
@@ -15,7 +24,7 @@ export function PreviewPane({ story, selectedSectionId }: Props) {
         <span className={styles.previewTitle}>{story.title}</span>
       </div>
 
-      <div className={styles.sections}>
+      <div className={styles.sections} style={themeVars}>
         {story.sections.map((section) => (
           <SectionRenderer
             key={section.id}
