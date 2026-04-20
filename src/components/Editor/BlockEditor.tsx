@@ -39,6 +39,9 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
   let inner: React.ReactNode = null;
 
   if (block.type === 'text') {
+    // Defensiv läsning: gamla localStorage-värden kan vara strängar ('base', 'lg' etc.)
+    const fontSize = typeof block.style.fontSize === 'number' ? block.style.fontSize : undefined;
+
     inner = (
       <>
         <div className={styles.blockHeader}>{handle}<span className={styles.blockType}>TEXT</span><button className={styles.removeBtn} onClick={remove}>×</button></div>
@@ -64,9 +67,9 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
         <div className={styles.sizeRow}>
           <div className={styles.sizeHeader}>
             <span className={styles.sizeLabel}>Storlek</span>
-            {block.style.fontSize ? (
+            {fontSize ? (
               <>
-                <span className={styles.sizeValue}>{block.style.fontSize.toFixed(2)} rem</span>
+                <span className={styles.sizeValue}>{fontSize.toFixed(2)} rem</span>
                 <button
                   className={styles.sizeReset}
                   onClick={() => update({ style: { ...block.style, fontSize: undefined } })}
@@ -83,7 +86,7 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
             min={FONT_SIZE_MIN}
             max={FONT_SIZE_MAX}
             step={FONT_SIZE_STEP}
-            value={block.style.fontSize ?? 1.1}
+            value={fontSize ?? 1.1}
             onChange={(e) => update({ style: { ...block.style, fontSize: parseFloat(e.target.value) } })}
           />
           <div className={styles.sizeScale}>

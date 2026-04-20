@@ -30,7 +30,7 @@ export function BlockRenderer({ block }: Props) {
   if (block.type === 'text') {
     const inlineStyle: CSSProperties = {};
     if (block.style.color) inlineStyle.color = block.style.color;
-    if (block.style.fontSize) inlineStyle.fontSize = `${block.style.fontSize}rem`;
+    if (typeof block.style.fontSize === 'number') inlineStyle.fontSize = `${block.style.fontSize}rem`;
     return (
       <div
         className={`${getTextClass(block.style.variant)} ${getAlignClass(block.style.alignment)}`}
