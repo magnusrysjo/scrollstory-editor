@@ -12,9 +12,9 @@
 
 .label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   letter-spacing: 0.15em;
-  color: #5a5a7a;
+  color: #8a8aaa;
 }
 
 /* Bakgrundsfärg */
@@ -27,8 +27,8 @@
 .fieldLabel {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: #7a7a9a;
+  font-size: 0.72rem;
+  color: #9898b8;
   margin-bottom: 0.4rem;
 }
 
@@ -50,8 +50,8 @@
 
 .colorValue {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: #a0a0b8;
+  font-size: 0.78rem;
+  color: #bcbcd4;
 }
 
 /* Typ-toggle */
@@ -71,15 +71,15 @@
   background: none;
   border: none;
   border-radius: 4px;
-  color: #5a5a7a;
+  color: #8a8aaa;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.73rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
 
 .typeBtn:hover {
-  color: #a0a0b8;
+  color: #bcbcd4;
 }
 
 .typeBtnActive {
@@ -96,7 +96,7 @@
   border-radius: 4px;
   color: #d0d0e8;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   padding: 0.4rem 0.5rem;
   box-sizing: border-box;
   transition: border-color 0.15s;
@@ -108,7 +108,7 @@
 }
 
 .urlInput::placeholder {
-  color: #4a4a6a;
+  color: #7a7a9a;
 }
 
 /* Checkbox-rad */
@@ -144,9 +144,9 @@
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #7a7a9a;
+  color: #9898b8;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   padding: 0.2rem 0.4rem;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
@@ -160,8 +160,8 @@
 
 .colorHint {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  color: #4a4a6a;
+  font-size: 0.72rem;
+  color: #7a7a9a;
   margin-top: 0.3rem;
   line-height: 1.4;
 }
@@ -173,9 +173,9 @@
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  color: #a0a0b8;
+  color: #bcbcd4;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.73rem;
+  font-size: 0.85rem;
   padding: 0.35rem 0.5rem;
   cursor: pointer;
 }
@@ -198,8 +198,8 @@
 
 .emptyBlocks {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: #4a4a6a;
+  font-size: 0.78rem;
+  color: #7a7a9a;
   text-align: center;
   padding: 1.5rem 0;
 }

@@ -17,7 +17,7 @@
 .dragHandle {
   background: none;
   border: none;
-  color: #3a3a5a;
+  color: #666688;
   font-size: 1rem;
   cursor: grab;
   padding: 0 2px;
@@ -27,7 +27,7 @@
 }
 
 .dragHandle:hover {
-  color: #7a7a9a;
+  color: #9898b8;
 }
 
 .dragHandle:active {
@@ -36,22 +36,22 @@
 
 .blockType {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: #5a5a7a;
+  color: #8a8aaa;
   flex: 1;
 }
 
 .spacerValue {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.78rem;
   color: #e8a838;
 }
 
 .removeBtn {
   background: none;
   border: none;
-  color: #4a4a6a;
+  color: #7a7a9a;
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -72,7 +72,7 @@
   border-radius: 4px;
   color: #d0d0e8;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   padding: 0.5rem;
   resize: vertical;
@@ -96,9 +96,9 @@
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  color: #a0a0b8;
+  color: #bcbcd4;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.73rem;
+  font-size: 0.85rem;
   padding: 0.3rem 0.4rem;
   cursor: pointer;
 }
@@ -116,8 +116,8 @@
 .alignBtn {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #5a5a7a;
-  font-size: 0.75rem;
+  color: #8a8aaa;
+  font-size: 0.85rem;
   width: 26px;
   height: 26px;
   border-radius: 4px;
@@ -129,7 +129,7 @@
 }
 
 .alignBtn:hover {
-  color: #a0a0b8;
+  color: #bcbcd4;
 }
 
 .alignBtnActive {
@@ -152,27 +152,27 @@
 
 .sizeLabel {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: #5a5a7a;
+  font-size: 0.72rem;
+  color: #8a8aaa;
   flex: 1;
 }
 
 .sizeValue {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.78rem;
   color: #e8a838;
 }
 
 .sizeDefault {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: #4a4a6a;
+  font-size: 0.72rem;
+  color: #7a7a9a;
 }
 
 .sizeReset {
   background: none;
   border: none;
-  color: #5a5a7a;
+  color: #8a8aaa;
   font-size: 0.8rem;
   cursor: pointer;
   padding: 0 2px;
@@ -195,8 +195,8 @@
   display: flex;
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.52rem;
-  color: #3a3a5a;
+  font-size: 0.65rem;
+  color: #666688;
   padding: 0 2px;
 }
 
@@ -207,7 +207,7 @@
   border-radius: 4px;
   color: #d0d0e8;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   padding: 0.4rem 0.5rem;
   box-sizing: border-box;
   transition: border-color 0.15s;
@@ -219,7 +219,7 @@
 }
 
 .urlInput::placeholder {
-  color: #4a4a6a;
+  color: #7a7a9a;
 }
 
 .imagePreview {
@@ -246,8 +246,8 @@
 
 .miniLabel {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  color: #5a5a7a;
+  font-size: 0.72rem;
+  color: #8a8aaa;
 }
 
 .coordInput {
@@ -257,7 +257,7 @@
   border-radius: 4px;
   color: #d0d0e8;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   padding: 0.3rem 0.4rem;
   box-sizing: border-box;
 }
@@ -270,8 +270,8 @@
 /* Diagram-hint */
 .chartHint {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: #7a7a9a;
+  font-size: 0.78rem;
+  color: #9898b8;
   margin: 0;
   display: flex;
   align-items: center;
@@ -285,7 +285,7 @@
   border-radius: 4px;
   color: #d0d0e8;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.78rem;
   padding: 0.25rem 0.4rem;
 }
 
