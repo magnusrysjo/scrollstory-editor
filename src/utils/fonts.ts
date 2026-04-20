@@ -19,11 +19,12 @@ export const HEADING_FONTS: FontOption[] = [
 export const BODY_FONTS: FontOption[] = [
   { label: 'Inter', value: "'Inter', system-ui, sans-serif", gfFamily: 'Inter', gfWeights: 'wght@400;500' },
   { label: 'Lato', value: "'Lato', system-ui, sans-serif", gfFamily: 'Lato', gfWeights: 'wght@400;700' },
-  { label: 'DM Sans', value: "'DM+Sans', system-ui, sans-serif", gfFamily: 'DM+Sans', gfWeights: 'wght@400;500' },
+  { label: 'DM Sans', value: "'DM Sans', system-ui, sans-serif", gfFamily: 'DM+Sans', gfWeights: 'wght@400;500' },
   { label: 'Source Sans 3', value: "'Source Sans 3', system-ui, sans-serif", gfFamily: 'Source+Sans+3', gfWeights: 'wght@400;600' },
   { label: 'Nunito', value: "'Nunito', system-ui, sans-serif", gfFamily: 'Nunito', gfWeights: 'wght@400;600' },
   { label: 'Merriweather', value: "'Merriweather', Georgia, serif", gfFamily: 'Merriweather', gfWeights: 'wght@400;700' },
   { label: 'Open Sans', value: "'Open Sans', system-ui, sans-serif", gfFamily: 'Open+Sans', gfWeights: 'wght@400;600' },
+  { label: 'JetBrains Mono', value: "'JetBrains Mono', monospace", gfFamily: 'JetBrains+Mono', gfWeights: 'wght@400;500' },
 ];
 
 // Laddar in ett Google Fonts-typsnitt dynamiskt i dokumentet

@@ -24,6 +24,8 @@ export function ThemeEditor({ theme, dispatch }: Props) {
   const update = (updates: Partial<StoryTheme>) =>
     dispatch({ type: 'UPDATE_THEME', payload: { updates } });
 
+  const captionFont = theme.fontCaption ?? "'JetBrains Mono', monospace";
+
   // Lokalt state för egna typsnitt
   const [customHeading, setCustomHeading] = useState(
     isCustomFont(theme.fontHeading, HEADING_FONTS) ? customFontDisplayName(theme.fontHeading) : ''
@@ -33,9 +35,14 @@ export function ThemeEditor({ theme, dispatch }: Props) {
     isCustomFont(theme.fontBody, BODY_FONTS) ? customFontDisplayName(theme.fontBody) : ''
   );
   const [customBodyUrl, setCustomBodyUrl] = useState(theme.fontBodyUrl ?? '');
+  const [customCaption, setCustomCaption] = useState(
+    isCustomFont(captionFont, BODY_FONTS) ? customFontDisplayName(captionFont) : ''
+  );
+  const [customCaptionUrl, setCustomCaptionUrl] = useState(theme.fontCaptionUrl ?? '');
 
   const headingIsCustom = isCustomFont(theme.fontHeading, HEADING_FONTS);
   const bodyIsCustom = isCustomFont(theme.fontBody, BODY_FONTS);
+  const captionIsCustom = isCustomFont(captionFont, BODY_FONTS);
 
   const handleHeadingFont = (value: string) => {
     if (value === CUSTOM_VALUE) return;
@@ -61,6 +68,19 @@ export function ThemeEditor({ theme, dispatch }: Props) {
     const url = customBodyUrl.trim() || undefined;
     const css = loadCustomFont(customBody, url);
     if (css) update({ fontBody: css, fontBodyUrl: url });
+  };
+
+  const handleCaptionFont = (value: string) => {
+    if (value === CUSTOM_VALUE) return;
+    const font = findFont(value, BODY_FONTS);
+    if (font) loadGoogleFont(font);
+    update({ fontCaption: value, fontCaptionUrl: undefined });
+  };
+
+  const applyCustomCaption = () => {
+    const url = customCaptionUrl.trim() || undefined;
+    const css = loadCustomFont(customCaption, url);
+    if (css) update({ fontCaption: css, fontCaptionUrl: url });
   };
 
   return (
@@ -173,6 +193,59 @@ export function ThemeEditor({ theme, dispatch }: Props) {
             style={{ fontFamily: bodyIsCustom ? (customBody || 'sans-serif') : theme.fontBody }}
           >
             Aa — Brödtextfont
+          </div>
+        </div>
+        {/* Bildtext-font */}
+        <div className={styles.field}>
+          <label className={styles.fieldLabel}>Bildtext</label>
+          <select
+            className={styles.select}
+            value={captionIsCustom ? CUSTOM_VALUE : captionFont}
+            onChange={(e) => {
+              if (e.target.value === CUSTOM_VALUE) {
+                setCustomCaption('');
+                setCustomCaptionUrl('');
+                update({ fontCaption: CUSTOM_VALUE, fontCaptionUrl: undefined });
+              } else {
+                handleCaptionFont(e.target.value);
+              }
+            }}
+          >
+            {BODY_FONTS.map((f) => (
+              <option key={f.value} value={f.value}>{f.label}</option>
+            ))}
+            <option value={CUSTOM_VALUE}>Eget typsnitt…</option>
+          </select>
+
+          {captionIsCustom && (
+            <div className={styles.customBlock}>
+              <div className={styles.customRow}>
+                <input
+                  type="text"
+                  className={styles.customInput}
+                  placeholder="Typsnittets namn"
+                  value={customCaption}
+                  onChange={(e) => setCustomCaption(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && applyCustomCaption()}
+                />
+              </div>
+              <input
+                type="url"
+                className={styles.customUrlInput}
+                placeholder="URL till .woff2, .css eller lämna tomt för Google Fonts"
+                value={customCaptionUrl}
+                onChange={(e) => setCustomCaptionUrl(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && applyCustomCaption()}
+              />
+              <button className={styles.loadBtn} onClick={applyCustomCaption}>Ladda typsnitt</button>
+            </div>
+          )}
+
+          <div
+            className={styles.fontPreviewCaption}
+            style={{ fontFamily: captionIsCustom ? (customCaption || 'monospace') : captionFont }}
+          >
+            Aa — Bildtextfont
           </div>
         </div>
       </div>

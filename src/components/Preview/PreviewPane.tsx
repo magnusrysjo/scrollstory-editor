@@ -13,6 +13,7 @@ export function PreviewPane({ story, selectedSectionId }: Props) {
   const themeVars: CSSProperties = {
     '--font-heading': story.theme.fontHeading,
     '--font-body': story.theme.fontBody,
+    '--font-caption': story.theme.fontCaption ?? "'JetBrains Mono', monospace",
     '--color-primary': story.theme.colorPrimary,
     '--color-text': story.theme.colorText,
   } as CSSProperties;

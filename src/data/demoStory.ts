@@ -6,6 +6,7 @@ export const demoStory: Story = {
   theme: {
     fontHeading: 'Playfair Display, Georgia, serif',
     fontBody: 'Inter, system-ui, sans-serif',
+    fontCaption: "'JetBrains Mono', monospace",
     colorPrimary: '#E8A838',
     colorBackground: '#F8F6F1',
     colorText: '#1A1A2E',
