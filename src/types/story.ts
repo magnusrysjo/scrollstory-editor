@@ -37,13 +37,11 @@ export type ContentBlock =
 
 export type TransitionType = 'fade' | 'slide-up' | 'parallax' | 'cut';
 
-export type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl';
-
 export type TextStyle = {
   variant: 'heading' | 'subheading' | 'body' | 'quote' | 'caption';
   alignment: 'left' | 'center' | 'right';
   color?: string;
-  fontSize?: FontSize;
+  fontSize?: number; // rem-värde, t.ex. 1.2 = 1.2rem. Saknas = CSS-klassens standard.
 };
 
 export type StoryTheme = {

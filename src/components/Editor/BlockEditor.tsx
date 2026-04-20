@@ -1,5 +1,5 @@
 import type { Dispatch } from 'react';
-import type { ContentBlock, TextStyle, ContentBlockFields, FontSize } from '../../types/story';
+import type { ContentBlock, TextStyle, ContentBlockFields } from '../../types/story';
 import type { StoryAction } from '../../hooks/useStory';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -15,9 +15,9 @@ const VARIANT_LABELS: Record<TextStyle['variant'], string> = {
   heading: 'Rubrik', subheading: 'Underrubrik', body: 'Brödtext', quote: 'Citat', caption: 'Bildtext',
 };
 const ALIGNMENT_LABELS: Record<TextStyle['alignment'], string> = { left: '←', center: '↔', right: '→' };
-const FONT_SIZE_LABELS: Record<FontSize, string> = {
-  xs: 'XS', sm: 'S', base: 'M', lg: 'L', xl: 'XL', '2xl': '2XL', '3xl': '3XL',
-};
+const FONT_SIZE_MIN = 0.5;
+const FONT_SIZE_MAX = 8;
+const FONT_SIZE_STEP = 0.05;
 
 export function BlockEditor({ block, sectionId, dispatch }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: block.id });
@@ -62,13 +62,33 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
           </div>
         </div>
         <div className={styles.sizeRow}>
-          {(Object.keys(FONT_SIZE_LABELS) as FontSize[]).map((s) => (
-            <button key={s}
-              className={`${styles.sizeBtn} ${(block.style.fontSize ?? 'base') === s ? styles.sizeBtnActive : ''}`}
-              onClick={() => update({ style: { ...block.style, fontSize: s } })}>
-              {FONT_SIZE_LABELS[s]}
-            </button>
-          ))}
+          <div className={styles.sizeHeader}>
+            <span className={styles.sizeLabel}>Storlek</span>
+            {block.style.fontSize ? (
+              <>
+                <span className={styles.sizeValue}>{block.style.fontSize.toFixed(2)} rem</span>
+                <button
+                  className={styles.sizeReset}
+                  onClick={() => update({ style: { ...block.style, fontSize: undefined } })}
+                  title="Återställ till standard"
+                >↺</button>
+              </>
+            ) : (
+              <span className={styles.sizeDefault}>Standard</span>
+            )}
+          </div>
+          <input
+            type="range"
+            className={styles.slider}
+            min={FONT_SIZE_MIN}
+            max={FONT_SIZE_MAX}
+            step={FONT_SIZE_STEP}
+            value={block.style.fontSize ?? 1.1}
+            onChange={(e) => update({ style: { ...block.style, fontSize: parseFloat(e.target.value) } })}
+          />
+          <div className={styles.sizeScale}>
+            <span>0.5</span><span>2</span><span>4</span><span>6</span><span>8 rem</span>
+          </div>
         </div>
       </>
     );

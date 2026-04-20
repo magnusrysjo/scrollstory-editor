@@ -140,30 +140,47 @@
 
 .sizeRow {
   display: flex;
-  gap: 2px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.sizeBtn {
-  flex: 1;
-  min-width: 28px;
-  padding: 0.2rem 0.3rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  color: #5a5a7a;
+.sizeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sizeLabel {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  text-align: center;
+  color: #5a5a7a;
+  flex: 1;
 }
 
-.sizeBtn:hover { color: #a0a0b8; }
+.sizeValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #e8a838;
+}
 
-.sizeBtnActive {
-  background: rgba(232, 168, 56, 0.15);
-  border-color: rgba(232, 168, 56, 0.35);
+.sizeDefault {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: #4a4a6a;
+}
+
+.sizeReset {
+  background: none;
+  border: none;
+  color: #5a5a7a;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.sizeReset:hover {
   color: #e8a838;
 }
 
@@ -171,6 +188,16 @@
   width: 100%;
   accent-color: #e8a838;
   cursor: pointer;
+  height: 18px;
+}
+
+.sizeScale {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem;
+  color: #3a3a5a;
+  padding: 0 2px;
 }
 
 .urlInput {

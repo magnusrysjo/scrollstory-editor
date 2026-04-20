@@ -1,17 +1,7 @@
 import { lazy, Suspense } from 'react';
 import type { CSSProperties } from 'react';
-import type { ContentBlock, TextStyle, FontSize } from '../../types/story';
+import type { ContentBlock, TextStyle } from '../../types/story';
 import styles from './BlockRenderer.module.css';
-
-const FONT_SIZE_MAP: Record<FontSize, string> = {
-  xs:   '0.7rem',
-  sm:   '0.875rem',
-  base: '',          // töm = använd CSS-klassens default
-  lg:   '1.3rem',
-  xl:   '1.6rem',
-  '2xl':'2.2rem',
-  '3xl':'3.2rem',
-};
 
 // Lazy-load tunga block för snabbare initial render
 const MapBlock = lazy(() => import('./blocks/MapBlock'));
@@ -40,9 +30,7 @@ export function BlockRenderer({ block }: Props) {
   if (block.type === 'text') {
     const inlineStyle: CSSProperties = {};
     if (block.style.color) inlineStyle.color = block.style.color;
-    if (block.style.fontSize && FONT_SIZE_MAP[block.style.fontSize]) {
-      inlineStyle.fontSize = FONT_SIZE_MAP[block.style.fontSize];
-    }
+    if (block.style.fontSize) inlineStyle.fontSize = `${block.style.fontSize}rem`;
     return (
       <div
         className={`${getTextClass(block.style.variant)} ${getAlignClass(block.style.alignment)}`}

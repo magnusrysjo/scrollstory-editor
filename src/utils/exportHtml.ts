@@ -1,10 +1,5 @@
-import type { Story, Section, ContentBlock, BackgroundLayer, FontSize } from '../types/story';
+import type { Story, Section, ContentBlock, BackgroundLayer } from '../types/story';
 import { HEADING_FONTS, BODY_FONTS, googleFontsUrl, findFont, isCustomFont, customFontExportMarkup } from './fonts';
-
-const FONT_SIZE_MAP: Record<FontSize, string> = {
-  xs: '0.7rem', sm: '0.875rem', base: '', lg: '1.3rem',
-  xl: '1.6rem', '2xl': '2.2rem', '3xl': '3.2rem',
-};
 
 function renderBgStyle(bg: BackgroundLayer): string {
   if (bg.type === 'color') return `background-color:${bg.value};`;
@@ -22,9 +17,7 @@ function renderBlock(block: ContentBlock): string {
     const cls = `block-${block.style.variant} align-${block.style.alignment}`;
     const inlineStyles: string[] = [];
     if (block.style.color) inlineStyles.push(`color:${block.style.color}`);
-    if (block.style.fontSize && FONT_SIZE_MAP[block.style.fontSize]) {
-      inlineStyles.push(`font-size:${FONT_SIZE_MAP[block.style.fontSize]}`);
-    }
+    if (block.style.fontSize) inlineStyles.push(`font-size:${block.style.fontSize}rem`);
     const styleAttr = inlineStyles.length ? ` style="${inlineStyles.join(';')}"` : '';
     return `<${tag} class="${cls}"${styleAttr}>${escHtml(block.content)}</${tag}>`;
   }
