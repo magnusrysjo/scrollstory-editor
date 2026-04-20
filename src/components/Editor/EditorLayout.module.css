@@ -8,36 +8,37 @@
 /* === Sidebar === */
 
 .sidebar {
-  width: 350px;
+  width: 380px;
   flex-shrink: 0;
   background: #1a1a2e;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .sidebarHeader {
   padding: 1.25rem 1.5rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   flex-shrink: 0;
 }
 
 .appLabel {
   display: block;
   font-family: 'JetBrains Mono', 'Menlo', monospace;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   color: #e8a838;
   margin-bottom: 0.4rem;
+  text-transform: uppercase;
 }
 
 .storyTitle {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #e8e8e8;
+  color: #f0f0f8;
   margin: 0;
   line-height: 1.3;
   white-space: nowrap;
@@ -55,8 +56,8 @@
 
 .emptyHint p {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  color: #7a7a9a;
+  font-size: 0.75rem;
+  color: #888899;
   text-align: center;
   line-height: 1.6;
 }
@@ -65,7 +66,7 @@
 
 .toolbar {
   flex-shrink: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding: 0.6rem 1rem;
   display: flex;
   align-items: center;
@@ -74,14 +75,14 @@
 
 .autoSave {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #3a6a3a;
+  font-size: 0.7rem;
+  color: #4a8a4a;
   flex: 1;
 }
 
 .saveMsg {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: #e8a838;
   flex: 1;
 }
@@ -92,12 +93,12 @@
 }
 
 .toolBtn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #9898b8;
+  color: #b0b0cc;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   padding: 0.3rem 0.5rem;
   cursor: pointer;
   white-space: nowrap;
@@ -105,14 +106,14 @@
 }
 
 .toolBtn:hover {
-  background: rgba(232, 168, 56, 0.1);
-  border-color: rgba(232, 168, 56, 0.3);
+  background: rgba(232, 168, 56, 0.12);
+  border-color: rgba(232, 168, 56, 0.35);
   color: #e8a838;
 }
 
 .toolBtnDanger:hover {
-  background: rgba(232, 88, 88, 0.1);
-  border-color: rgba(232, 88, 88, 0.3);
+  background: rgba(232, 88, 88, 0.12);
+  border-color: rgba(232, 88, 88, 0.35);
   color: #e85858;
 }
 

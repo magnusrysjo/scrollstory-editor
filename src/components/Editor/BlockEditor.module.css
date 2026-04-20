@@ -1,6 +1,6 @@
 .block {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   padding: 0.75rem;
   display: flex;
@@ -17,7 +17,7 @@
 .dragHandle {
   background: none;
   border: none;
-  color: #666688;
+  color: #888899;
   font-size: 1rem;
   cursor: grab;
   padding: 0 2px;
@@ -27,7 +27,7 @@
 }
 
 .dragHandle:hover {
-  color: #9898b8;
+  color: #b0b0cc;
 }
 
 .dragHandle:active {
@@ -36,9 +36,10 @@
 
 .blockType {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: #8a8aaa;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #aaaacc;
+  text-transform: uppercase;
   flex: 1;
 }
 
@@ -51,7 +52,7 @@
 .removeBtn {
   background: none;
   border: none;
-  color: #7a7a9a;
+  color: #888899;
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -62,17 +63,17 @@
 
 .removeBtn:hover {
   color: #e85858;
-  background: rgba(232, 88, 88, 0.1);
+  background: rgba(232, 88, 88, 0.12);
 }
 
 .textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #d0d0e8;
+  color: #e0e0f4;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   padding: 0.5rem;
   resize: vertical;
@@ -82,7 +83,11 @@
 
 .textarea:focus {
   outline: none;
-  border-color: rgba(232, 168, 56, 0.4);
+  border-color: rgba(232, 168, 56, 0.45);
+}
+
+.textarea::placeholder {
+  color: #6a6a88;
 }
 
 .styleRow {
@@ -93,19 +98,19 @@
 
 .select {
   flex: 1;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #bcbcd4;
+  color: #e0e0f4;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   padding: 0.3rem 0.4rem;
   cursor: pointer;
 }
 
 .select:focus {
   outline: none;
-  border-color: rgba(232, 168, 56, 0.4);
+  border-color: rgba(232, 168, 56, 0.45);
 }
 
 .alignGroup {
@@ -114,9 +119,9 @@
 }
 
 .alignBtn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #8a8aaa;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #888899;
   font-size: 0.85rem;
   width: 26px;
   height: 26px;
@@ -129,12 +134,12 @@
 }
 
 .alignBtn:hover {
-  color: #bcbcd4;
+  color: #c0c0e0;
 }
 
 .alignBtnActive {
-  background: rgba(232, 168, 56, 0.15);
-  border-color: rgba(232, 168, 56, 0.35);
+  background: rgba(232, 168, 56, 0.16);
+  border-color: rgba(232, 168, 56, 0.4);
   color: #e8a838;
 }
 
@@ -152,8 +157,8 @@
 
 .sizeLabel {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #8a8aaa;
+  font-size: 0.78rem;
+  color: #c0c0e0;
   flex: 1;
 }
 
@@ -166,13 +171,13 @@
 .sizeDefault {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.72rem;
-  color: #7a7a9a;
+  color: #888899;
 }
 
 .sizeReset {
   background: none;
   border: none;
-  color: #8a8aaa;
+  color: #888899;
   font-size: 0.8rem;
   cursor: pointer;
   padding: 0 2px;
@@ -196,18 +201,18 @@
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.65rem;
-  color: #666688;
+  color: #888899;
   padding: 0 2px;
 }
 
 .urlInput {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #d0d0e8;
+  color: #e0e0f4;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   padding: 0.4rem 0.5rem;
   box-sizing: border-box;
   transition: border-color 0.15s;
@@ -215,11 +220,11 @@
 
 .urlInput:focus {
   outline: none;
-  border-color: rgba(232, 168, 56, 0.4);
+  border-color: rgba(232, 168, 56, 0.45);
 }
 
 .urlInput::placeholder {
-  color: #7a7a9a;
+  color: #6a6a88;
 }
 
 .imagePreview {
@@ -246,32 +251,32 @@
 
 .miniLabel {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #8a8aaa;
+  font-size: 0.78rem;
+  color: #c0c0e0;
 }
 
 .coordInput {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #d0d0e8;
+  color: #e0e0f4;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   padding: 0.3rem 0.4rem;
   box-sizing: border-box;
 }
 
 .coordInput:focus {
   outline: none;
-  border-color: rgba(232, 168, 56, 0.4);
+  border-color: rgba(232, 168, 56, 0.45);
 }
 
 /* Diagram-hint */
 .chartHint {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.78rem;
-  color: #9898b8;
+  color: #c0c0e0;
   margin: 0;
   display: flex;
   align-items: center;
@@ -280,16 +285,16 @@
 
 .inlineInput {
   flex: 1;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #d0d0e8;
+  color: #e0e0f4;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   padding: 0.25rem 0.4rem;
 }
 
 .inlineInput:focus {
   outline: none;
-  border-color: rgba(232, 168, 56, 0.4);
+  border-color: rgba(232, 168, 56, 0.45);
 }

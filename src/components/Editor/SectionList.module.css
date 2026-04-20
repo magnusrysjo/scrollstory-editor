@@ -1,6 +1,6 @@
 .container {
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .header {
@@ -12,17 +12,18 @@
 
 .label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.15em;
-  color: #8a8aaa;
+  color: #aaaacc;
+  text-transform: uppercase;
 }
 
 .addBtn {
   width: 22px;
   height: 22px;
   background: rgba(232, 168, 56, 0.12);
-  border: 1px solid rgba(232, 168, 56, 0.3);
+  border: 1px solid rgba(232, 168, 56, 0.35);
   color: #e8a838;
   border-radius: 4px;
   font-size: 1rem;
@@ -35,8 +36,8 @@
 }
 
 .addBtn:hover {
-  background: rgba(232, 168, 56, 0.22);
-  border-color: rgba(232, 168, 56, 0.6);
+  background: rgba(232, 168, 56, 0.24);
+  border-color: rgba(232, 168, 56, 0.65);
 }
 
 .list {
@@ -51,7 +52,7 @@
 .dragHandle {
   background: none;
   border: none;
-  color: #666688;
+  color: #888899;
   font-size: 1rem;
   cursor: grab;
   padding: 0 2px;
@@ -61,7 +62,7 @@
 }
 
 .dragHandle:hover {
-  color: #9898b8;
+  color: #b0b0cc;
 }
 
 .dragHandle:active {
@@ -74,24 +75,24 @@
   gap: 0.6rem;
   padding: 0.5rem 0.75rem 0.5rem 0.5rem;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .cardSelected {
-  background: rgba(232, 168, 56, 0.1);
-  border-color: rgba(232, 168, 56, 0.35);
+  background: rgba(232, 168, 56, 0.12);
+  border-color: rgba(232, 168, 56, 0.4);
 }
 
 .cardSelected:hover {
-  background: rgba(232, 168, 56, 0.14);
+  background: rgba(232, 168, 56, 0.16);
 }
 
 .cardSwatch {
@@ -99,7 +100,7 @@
   height: 28px;
   border-radius: 4px;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .cardInfo {
@@ -114,19 +115,19 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.78rem;
   font-weight: 500;
-  color: #d4d4ea;
+  color: #c0c0e0;
 }
 
 .cardMeta {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #8a8aaa;
+  font-size: 0.7rem;
+  color: #888899;
 }
 
 .removeBtn {
   background: none;
   border: none;
-  color: #7a7a9a;
+  color: #888899;
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -138,13 +139,13 @@
 
 .removeBtn:hover {
   color: #e8a838;
-  background: rgba(232, 168, 56, 0.1);
+  background: rgba(232, 168, 56, 0.12);
 }
 
 .empty {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  color: #7a7a9a;
+  font-size: 0.75rem;
+  color: #888899;
   text-align: center;
   padding: 1rem 0;
 }
