@@ -19,6 +19,10 @@ const FONT_SIZE_MIN = 0.5;
 const FONT_SIZE_MAX = 8;
 const FONT_SIZE_STEP = 0.05;
 
+const LINE_HEIGHT_MIN = 0.8;
+const LINE_HEIGHT_MAX = 3.0;
+const LINE_HEIGHT_STEP = 0.05;
+
 export function BlockEditor({ block, sectionId, dispatch }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: block.id });
 
@@ -41,6 +45,7 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
   if (block.type === 'text') {
     // Defensiv läsning: gamla localStorage-värden kan vara strängar ('base', 'lg' etc.)
     const fontSize = typeof block.style.fontSize === 'number' ? block.style.fontSize : undefined;
+    const lineHeight = typeof block.style.lineHeight === 'number' ? block.style.lineHeight : undefined;
 
     inner = (
       <>
@@ -91,6 +96,35 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
           />
           <div className={styles.sizeScale}>
             <span>0.5</span><span>2</span><span>4</span><span>6</span><span>8 rem</span>
+          </div>
+        </div>
+        <div className={styles.sizeRow}>
+          <div className={styles.sizeHeader}>
+            <span className={styles.sizeLabel}>Radavstånd</span>
+            {lineHeight ? (
+              <>
+                <span className={styles.sizeValue}>{lineHeight.toFixed(2)}</span>
+                <button
+                  className={styles.sizeReset}
+                  onClick={() => update({ style: { ...block.style, lineHeight: undefined } })}
+                  title="Återställ till standard"
+                >↺</button>
+              </>
+            ) : (
+              <span className={styles.sizeDefault}>Standard</span>
+            )}
+          </div>
+          <input
+            type="range"
+            className={styles.slider}
+            min={LINE_HEIGHT_MIN}
+            max={LINE_HEIGHT_MAX}
+            step={LINE_HEIGHT_STEP}
+            value={lineHeight ?? 1.5}
+            onChange={(e) => update({ style: { ...block.style, lineHeight: parseFloat(e.target.value) } })}
+          />
+          <div className={styles.sizeScale}>
+            <span>0.8</span><span>1.5</span><span>2.0</span><span>2.5</span><span>3.0</span>
           </div>
         </div>
       </>

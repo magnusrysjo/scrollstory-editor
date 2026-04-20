@@ -41,7 +41,8 @@ export type TextStyle = {
   variant: 'heading' | 'subheading' | 'body' | 'quote' | 'caption';
   alignment: 'left' | 'center' | 'right';
   color?: string;
-  fontSize?: number; // rem-värde, t.ex. 1.2 = 1.2rem. Saknas = CSS-klassens standard.
+  fontSize?: number;    // rem-värde. Saknas = CSS-klassens standard.
+  lineHeight?: number;  // t.ex. 1.4. Saknas = CSS-klassens standard.
 };
 
 export type StoryTheme = {

@@ -18,6 +18,7 @@ function renderBlock(block: ContentBlock): string {
     const inlineStyles: string[] = ['white-space:pre-wrap'];
     if (block.style.color) inlineStyles.push(`color:${block.style.color}`);
     if (block.style.fontSize) inlineStyles.push(`font-size:${block.style.fontSize}rem`);
+    if (block.style.lineHeight) inlineStyles.push(`line-height:${block.style.lineHeight}`);
     const styleAttr = inlineStyles.length ? ` style="${inlineStyles.join(';')}"` : '';
     return `<${tag} class="${cls}"${styleAttr}>${escHtml(block.content)}</${tag}>`;
   }

@@ -32,6 +32,7 @@ export function BlockRenderer({ block }: Props) {
     inlineStyle.whiteSpace = 'pre-wrap';
     if (block.style.color) inlineStyle.color = block.style.color;
     if (typeof block.style.fontSize === 'number') inlineStyle.fontSize = `${block.style.fontSize}rem`;
+    if (typeof block.style.lineHeight === 'number') inlineStyle.lineHeight = block.style.lineHeight;
     return (
       <div
         className={`${getTextClass(block.style.variant)} ${getAlignClass(block.style.alignment)}`}
