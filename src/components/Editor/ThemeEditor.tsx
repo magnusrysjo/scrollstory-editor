@@ -24,39 +24,43 @@ export function ThemeEditor({ theme, dispatch }: Props) {
   const update = (updates: Partial<StoryTheme>) =>
     dispatch({ type: 'UPDATE_THEME', payload: { updates } });
 
-  // Lokalt state för egna typsnittsnamn i inputfälten
+  // Lokalt state för egna typsnitt
   const [customHeading, setCustomHeading] = useState(
     isCustomFont(theme.fontHeading, HEADING_FONTS) ? customFontDisplayName(theme.fontHeading) : ''
   );
+  const [customHeadingUrl, setCustomHeadingUrl] = useState(theme.fontHeadingUrl ?? '');
   const [customBody, setCustomBody] = useState(
     isCustomFont(theme.fontBody, BODY_FONTS) ? customFontDisplayName(theme.fontBody) : ''
   );
+  const [customBodyUrl, setCustomBodyUrl] = useState(theme.fontBodyUrl ?? '');
 
   const headingIsCustom = isCustomFont(theme.fontHeading, HEADING_FONTS);
   const bodyIsCustom = isCustomFont(theme.fontBody, BODY_FONTS);
 
   const handleHeadingFont = (value: string) => {
-    if (value === CUSTOM_VALUE) return; // väntar på input
+    if (value === CUSTOM_VALUE) return;
     const font = findFont(value, HEADING_FONTS);
     if (font) loadGoogleFont(font);
-    update({ fontHeading: value });
+    update({ fontHeading: value, fontHeadingUrl: undefined });
   };
 
   const handleBodyFont = (value: string) => {
     if (value === CUSTOM_VALUE) return;
     const font = findFont(value, BODY_FONTS);
     if (font) loadGoogleFont(font);
-    update({ fontBody: value });
+    update({ fontBody: value, fontBodyUrl: undefined });
   };
 
   const applyCustomHeading = () => {
-    const css = loadCustomFont(customHeading);
-    if (css) update({ fontHeading: css });
+    const url = customHeadingUrl.trim() || undefined;
+    const css = loadCustomFont(customHeading, url);
+    if (css) update({ fontHeading: css, fontHeadingUrl: url });
   };
 
   const applyCustomBody = () => {
-    const css = loadCustomFont(customBody);
-    if (css) update({ fontBody: css });
+    const url = customBodyUrl.trim() || undefined;
+    const css = loadCustomFont(customBody, url);
+    if (css) update({ fontBody: css, fontBodyUrl: url });
   };
 
   return (
@@ -73,7 +77,8 @@ export function ThemeEditor({ theme, dispatch }: Props) {
             onChange={(e) => {
               if (e.target.value === CUSTOM_VALUE) {
                 setCustomHeading('');
-                update({ fontHeading: CUSTOM_VALUE });
+                setCustomHeadingUrl('');
+                update({ fontHeading: CUSTOM_VALUE, fontHeadingUrl: undefined });
               } else {
                 handleHeadingFont(e.target.value);
               }
@@ -86,16 +91,26 @@ export function ThemeEditor({ theme, dispatch }: Props) {
           </select>
 
           {headingIsCustom && (
-            <div className={styles.customRow}>
+            <div className={styles.customBlock}>
+              <div className={styles.customRow}>
+                <input
+                  type="text"
+                  className={styles.customInput}
+                  placeholder="Typsnittets namn, t.ex. MyFont"
+                  value={customHeading}
+                  onChange={(e) => setCustomHeading(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && applyCustomHeading()}
+                />
+              </div>
               <input
-                type="text"
-                className={styles.customInput}
-                placeholder="T.ex. Oswald eller Raleway"
-                value={customHeading}
-                onChange={(e) => setCustomHeading(e.target.value)}
+                type="url"
+                className={styles.customUrlInput}
+                placeholder="URL till .woff2, .css eller lämna tomt för Google Fonts"
+                value={customHeadingUrl}
+                onChange={(e) => setCustomHeadingUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && applyCustomHeading()}
               />
-              <button className={styles.loadBtn} onClick={applyCustomHeading}>Ladda</button>
+              <button className={styles.loadBtn} onClick={applyCustomHeading}>Ladda typsnitt</button>
             </div>
           )}
 
@@ -116,7 +131,8 @@ export function ThemeEditor({ theme, dispatch }: Props) {
             onChange={(e) => {
               if (e.target.value === CUSTOM_VALUE) {
                 setCustomBody('');
-                update({ fontBody: CUSTOM_VALUE });
+                setCustomBodyUrl('');
+                update({ fontBody: CUSTOM_VALUE, fontBodyUrl: undefined });
               } else {
                 handleBodyFont(e.target.value);
               }
@@ -129,16 +145,26 @@ export function ThemeEditor({ theme, dispatch }: Props) {
           </select>
 
           {bodyIsCustom && (
-            <div className={styles.customRow}>
+            <div className={styles.customBlock}>
+              <div className={styles.customRow}>
+                <input
+                  type="text"
+                  className={styles.customInput}
+                  placeholder="Typsnittets namn, t.ex. MyFont"
+                  value={customBody}
+                  onChange={(e) => setCustomBody(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && applyCustomBody()}
+                />
+              </div>
               <input
-                type="text"
-                className={styles.customInput}
-                placeholder="T.ex. Nunito eller Roboto"
-                value={customBody}
-                onChange={(e) => setCustomBody(e.target.value)}
+                type="url"
+                className={styles.customUrlInput}
+                placeholder="URL till .woff2, .css eller lämna tomt för Google Fonts"
+                value={customBodyUrl}
+                onChange={(e) => setCustomBodyUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && applyCustomBody()}
               />
-              <button className={styles.loadBtn} onClick={applyCustomBody}>Ladda</button>
+              <button className={styles.loadBtn} onClick={applyCustomBody}>Ladda typsnitt</button>
             </div>
           )}
 

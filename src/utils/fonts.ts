@@ -58,23 +58,71 @@ export function customFontDisplayName(value: string): string {
   return m ? m[1] : value;
 }
 
-// Laddar ett eget Google Fonts-typsnitt och returnerar CSS-värdet
-export function loadCustomFont(familyName: string): string {
-  const trimmed = familyName.trim();
-  if (!trimmed) return '';
-  const gfFamily = trimmed.replace(/\s+/g, '+');
-  const id = `gf-custom-${gfFamily}`;
-  if (!document.getElementById(id)) {
-    const link = document.createElement('link');
-    link.id = id;
-    link.rel = 'stylesheet';
-    link.href = `https://fonts.googleapis.com/css2?family=${gfFamily}:ital,wght@0,400;0,700;1,400&display=swap`;
-    document.head.appendChild(link);
-  }
-  return `'${trimmed}', sans-serif`;
+// Avgör om en URL pekar på en font-fil (woff2/woff/ttf/otf) eller en stylesheet
+function isFontFile(url: string): boolean {
+  return /\.(woff2?|ttf|otf)(\?.*)?$/i.test(url);
 }
 
-// Bygger GF-URL för ett eget typsnitt (för HTML-export)
+// Laddar ett eget typsnitt — antingen från en URL (stylesheet eller font-fil) eller Google Fonts
+// Returnerar CSS font-family-värdet som ska lagras i temat
+export function loadCustomFont(familyName: string, url?: string): string {
+  const trimmed = familyName.trim();
+  if (!trimmed) return '';
+
+  const cssValue = `'${trimmed}', sans-serif`;
+
+  if (url && url.trim()) {
+    const trimmedUrl = url.trim();
+    const id = `font-custom-${trimmed.replace(/\s+/g, '-').toLowerCase()}`;
+    if (!document.getElementById(id)) {
+      if (isFontFile(trimmedUrl)) {
+        // Direkt font-fil → generera @font-face
+        const style = document.createElement('style');
+        style.id = id;
+        style.textContent = `@font-face { font-family: '${trimmed}'; src: url('${trimmedUrl}') format('${trimmedUrl.includes('.woff2') ? 'woff2' : 'woff'}'); font-weight: 100 900; font-display: swap; }`;
+        document.head.appendChild(style);
+      } else {
+        // CSS-stylesheet (Adobe Fonts, egenhostad CSS, etc.)
+        const link = document.createElement('link');
+        link.id = id;
+        link.rel = 'stylesheet';
+        link.href = trimmedUrl;
+        document.head.appendChild(link);
+      }
+    }
+  } else {
+    // Ingen URL → hämta från Google Fonts
+    const gfFamily = trimmed.replace(/\s+/g, '+');
+    const id = `gf-custom-${gfFamily}`;
+    if (!document.getElementById(id)) {
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${gfFamily}:ital,wght@0,400;0,700;1,400&display=swap`;
+      document.head.appendChild(link);
+    }
+  }
+
+  return cssValue;
+}
+
+// Bygger HTML-markup för att ladda ett eget typsnitt i export (stylesheet eller @font-face)
+export function customFontExportMarkup(cssValue: string, url?: string): string {
+  const name = customFontDisplayName(cssValue);
+  if (url && url.trim()) {
+    const trimmedUrl = url.trim();
+    if (isFontFile(trimmedUrl)) {
+      const fmt = trimmedUrl.includes('.woff2') ? 'woff2' : 'woff';
+      return `  <style>@font-face { font-family: '${name}'; src: url('${trimmedUrl}') format('${fmt}'); font-weight: 100 900; font-display: swap; }</style>`;
+    }
+    return `  <link href="${trimmedUrl}" rel="stylesheet">`;
+  }
+  // Fallback → Google Fonts
+  const gfFamily = name.replace(/\s+/g, '+');
+  return `  <link href="https://fonts.googleapis.com/css2?family=${gfFamily}:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">`;
+}
+
+// Bygger GF-URL för ett eget typsnitt (för HTML-export, bakåtkompatibilitet)
 export function customFontUrl(cssValue: string): string {
   const name = customFontDisplayName(cssValue);
   const gfFamily = name.replace(/\s+/g, '+');

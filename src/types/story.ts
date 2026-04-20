@@ -49,6 +49,8 @@ export type TextStyle = {
 export type StoryTheme = {
   fontHeading: string;
   fontBody: string;
+  fontHeadingUrl?: string; // valfri URL till stylesheet eller font-fil för rubriktypsnittet
+  fontBodyUrl?: string;    // valfri URL till stylesheet eller font-fil för brödtextypsnittet
   colorPrimary: string;
   colorBackground: string;
   colorText: string;

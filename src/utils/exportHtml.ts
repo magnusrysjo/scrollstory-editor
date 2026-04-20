@@ -1,5 +1,5 @@
 import type { Story, Section, ContentBlock, BackgroundLayer, FontSize } from '../types/story';
-import { HEADING_FONTS, BODY_FONTS, googleFontsUrl, findFont, isCustomFont, customFontUrl } from './fonts';
+import { HEADING_FONTS, BODY_FONTS, googleFontsUrl, findFont, isCustomFont, customFontExportMarkup } from './fonts';
 
 const FONT_SIZE_MAP: Record<FontSize, string> = {
   xs: '0.7rem', sm: '0.875rem', base: '', lg: '1.3rem',
@@ -85,10 +85,10 @@ export function exportStoryHtml(story: Story): void {
     fontLinks.push(`  <link href="${googleFontsUrl(knownFonts)}" rel="stylesheet">`);
   }
   if (isCustomFont(theme.fontHeading, HEADING_FONTS)) {
-    fontLinks.push(`  <link href="${customFontUrl(theme.fontHeading)}" rel="stylesheet">`);
+    fontLinks.push(customFontExportMarkup(theme.fontHeading, theme.fontHeadingUrl));
   }
   if (isCustomFont(theme.fontBody, BODY_FONTS)) {
-    fontLinks.push(`  <link href="${customFontUrl(theme.fontBody)}" rel="stylesheet">`);
+    fontLinks.push(customFontExportMarkup(theme.fontBody, theme.fontBodyUrl));
   }
 
   const html = `<!DOCTYPE html>
