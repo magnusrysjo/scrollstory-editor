@@ -119,7 +119,7 @@ ${fontLinks.join('\n')}
     .block-heading { font-family: var(--font-heading); font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; color: var(--color-text); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
     .block-subheading { font-family: var(--font-heading); font-size: clamp(1.2rem,3vw,1.8rem); font-weight: 400; font-style: italic; color: var(--color-text); opacity: 0.85; margin-bottom: 1rem; }
     .block-body { font-family: var(--font-body); font-size: clamp(0.95rem,1.5vw,1.1rem); line-height: 1.75; color: var(--color-text); opacity: 0.8; margin-bottom: 1rem; max-width: 60ch; }
-    .block-caption { font-family: var(--font-caption); font-size: 0.75rem; letter-spacing: 0.05em; color: var(--color-text); opacity: 0.5; margin-bottom: 0.75rem; text-transform: uppercase; }
+    .block-caption { font-family: var(--font-caption); font-size: 0.75rem; letter-spacing: 0.05em; color: var(--color-text); opacity: 0.5; margin-bottom: 0.75rem; }
     .block-quote { font-family: var(--font-heading); font-size: clamp(1.1rem,2vw,1.5rem); font-style: italic; color: var(--color-text); opacity: 0.9; margin: 1rem 0; padding-left: 1.5rem; border-left: 3px solid rgba(255,255,255,0.3); }
 
     blockquote.block-quote { padding: 1.5rem 2rem; border-left: 4px solid var(--color-primary); background: rgba(0,0,0,0.25); border-radius: 0 6px 6px 0; margin: 1rem 0 1.5rem; opacity: 1; }

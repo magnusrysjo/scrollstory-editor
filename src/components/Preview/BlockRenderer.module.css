@@ -46,7 +46,6 @@
   letter-spacing: 0.05em;
   color: color-mix(in srgb, var(--color-text, #fff) 50%, transparent);
   margin: 0 0 0.75rem;
-  text-transform: uppercase;
 }
 
 /* Alignment */
