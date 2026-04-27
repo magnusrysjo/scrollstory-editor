@@ -9,7 +9,14 @@ function renderBgStyle(bg: BackgroundLayer): string {
   return 'background-color:#1a1a2e;';
 }
 
-function renderBlock(block: ContentBlock): string {
+function renderBlock(block: ContentBlock, transition: string, index: number): string {
+  const inner = renderBlockInner(block);
+  if (!inner) return '';
+  if (transition === 'cut') return inner;
+  return `<div class="anim-block" data-anim="${transition}" data-idx="${index}">${inner}</div>`;
+}
+
+function renderBlockInner(block: ContentBlock): string {
   if (block.type === 'text') {
     const tag = block.style.variant === 'heading' ? 'h2'
       : block.style.variant === 'subheading' ? 'h3'
@@ -49,7 +56,10 @@ function renderBackground(bg: BackgroundLayer): string {
 
 function renderSection(section: Section): string {
   const bg = renderBackground(section.background);
-  const blocks = section.blocks.map(renderBlock).join('\n');
+  const blocks = section.blocks
+    .map((block, i) => renderBlock(block, section.transition, i))
+    .filter(Boolean)
+    .join('\n');
   const colorStyle = section.colorText ? ` style="--color-text:${section.colorText}"` : '';
   return `
   <section class="section">
@@ -135,10 +145,50 @@ ${fontLinks.join('\n')}
     .align-left { text-align: left; }
     .align-center { text-align: center; margin-left: auto; margin-right: auto; }
     .align-right { text-align: right; margin-left: auto; }
+
+    /* Scroll-animationer */
+    .anim-block { will-change: opacity, transform; }
+    .anim-block[data-anim="fade"] {
+      opacity: 0;
+      transition: opacity 0.8s ease-out;
+    }
+    .anim-block[data-anim="slide-up"] {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .anim-block[data-anim="parallax"] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .anim-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
 ${sections}
+<script>
+(function () {
+  var blocks = document.querySelectorAll('.anim-block');
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  blocks.forEach(function (el) {
+    var idx = parseInt(el.getAttribute('data-idx') || '0', 10);
+    el.style.transitionDelay = (idx * 0.12) + 's';
+    observer.observe(el);
+  });
+})();
+</script>
 </body>
 </html>`;
 
