@@ -77,6 +77,8 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
         style={{
           ...(section.colorText ? ({ '--color-text': section.colorText } as CSSProperties) : {}),
           minHeight: `${section.minHeight ?? 150}vh`,
+          paddingLeft: `${section.paddingLeft ?? 8}vw`,
+          paddingRight: `${section.paddingRight ?? 8}vw`,
         }}
       >
         {section.blocks.map((block, i) => (

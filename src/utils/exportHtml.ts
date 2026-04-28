@@ -63,9 +63,13 @@ function renderSection(section: Section): string {
     .filter(Boolean)
     .join('\n');
   const minH = section.minHeight ?? 150;
+  const pl = section.paddingLeft ?? 8;
+  const pr = section.paddingRight ?? 8;
   const inlineStyle = [
     section.colorText ? `--color-text:${section.colorText}` : '',
     minH !== 150 ? `min-height:${minH}vh` : '',
+    pl !== 8 ? `padding-left:${pl}vw` : '',
+    pr !== 8 ? `padding-right:${pr}vw` : '',
   ].filter(Boolean).join(';');
   const colorStyle = inlineStyle ? ` style="${inlineStyle}"` : '';
   return `

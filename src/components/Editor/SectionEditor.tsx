@@ -200,6 +200,48 @@ export function SectionEditor({ section, dispatch }: Props) {
         </div>
       </div>
 
+      {/* Marginaler */}
+      <div className={styles.field}>
+        <label className={styles.fieldLabel}>Marginaler (vw)</label>
+        <div className={styles.paddingGrid}>
+          <div className={styles.paddingCol}>
+            <div className={styles.paddingHeader}>
+              <span className={styles.paddingLabel}>Vänster</span>
+              <span className={styles.paddingValue}>{section.paddingLeft ?? 8}</span>
+            </div>
+            <input
+              type="range"
+              className={styles.heightSlider}
+              min={0} max={50} step={1}
+              value={section.paddingLeft ?? 8}
+              onChange={(e) => dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { paddingLeft: parseInt(e.target.value) } } })}
+            />
+          </div>
+          <div className={styles.paddingCol}>
+            <div className={styles.paddingHeader}>
+              <span className={styles.paddingLabel}>Höger</span>
+              <span className={styles.paddingValue}>{section.paddingRight ?? 8}</span>
+            </div>
+            <input
+              type="range"
+              className={styles.heightSlider}
+              min={0} max={50} step={1}
+              value={section.paddingRight ?? 8}
+              onChange={(e) => dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { paddingRight: parseInt(e.target.value) } } })}
+            />
+          </div>
+        </div>
+        <div className={styles.paddingReset}>
+          {((section.paddingLeft !== undefined && section.paddingLeft !== 8) ||
+            (section.paddingRight !== undefined && section.paddingRight !== 8)) && (
+            <button
+              className={styles.resetColorBtn}
+              onClick={() => dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { paddingLeft: undefined, paddingRight: undefined } } })}
+            >↺ Återställ marginaler</button>
+          )}
+        </div>
+      </div>
+
       {/* Övergång */}
       <div className={styles.field}>
         <label className={styles.fieldLabel}>Övergång till nästa sektion</label>

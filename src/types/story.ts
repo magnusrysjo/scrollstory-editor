@@ -10,8 +10,10 @@ export type Section = {
   background: BackgroundLayer;
   blocks: ContentBlock[];
   transition: TransitionType;
-  colorText?: string; // overridar theme.colorText för denna sektion
-  minHeight?: number; // min-höjd i vh-enheter, standard 150
+  colorText?: string;    // overridar theme.colorText för denna sektion
+  minHeight?: number;    // min-höjd i vh-enheter, standard 150
+  paddingLeft?: number;  // vänstermarginal i vw-enheter, standard 8
+  paddingRight?: number; // högermarginal i vw-enheter, standard 8
 };
 
 export type BackgroundLayer =
