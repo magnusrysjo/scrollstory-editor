@@ -168,6 +168,39 @@
   line-height: 1.4;
 }
 
+/* Sektionshöjd */
+
+.heightRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.heightValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #e8a838;
+  flex: 1;
+}
+
+.heightSlider {
+  width: 100%;
+  accent-color: #e8a838;
+  cursor: pointer;
+  height: 18px;
+}
+
+.heightScale {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: #666688;
+  padding: 0 2px;
+  margin-top: 0.15rem;
+}
+
 /* Övergång-select */
 
 .select {

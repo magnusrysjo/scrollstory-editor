@@ -62,7 +62,12 @@ function renderSection(section: Section): string {
     .map((block, i) => renderBlock(block, section.transition, i))
     .filter(Boolean)
     .join('\n');
-  const colorStyle = section.colorText ? ` style="--color-text:${section.colorText}"` : '';
+  const minH = section.minHeight ?? 150;
+  const inlineStyle = [
+    section.colorText ? `--color-text:${section.colorText}` : '',
+    minH !== 150 ? `min-height:${minH}vh` : '',
+  ].filter(Boolean).join(';');
+  const colorStyle = inlineStyle ? ` style="${inlineStyle}"` : '';
   return `
   <section class="section">
     ${bg}

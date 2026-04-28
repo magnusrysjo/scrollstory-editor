@@ -71,10 +71,13 @@ export function SectionRenderer({ section, isSelected = false }: Props) {
         <div className={styles.background} style={bgStyle} />
       )}
 
-      {/* Innehåll med animerade block — eventuell per-sektion textfärgoverride */}
+      {/* Innehåll med animerade block — eventuell per-sektion textfärg och höjdoverride */}
       <div
         className={styles.content}
-        style={section.colorText ? ({ '--color-text': section.colorText } as CSSProperties) : undefined}
+        style={{
+          ...(section.colorText ? ({ '--color-text': section.colorText } as CSSProperties) : {}),
+          minHeight: `${section.minHeight ?? 150}vh`,
+        }}
       >
         {section.blocks.map((block, i) => (
           <AnimatedBlock key={block.id} transition={section.transition} index={i}>

@@ -11,6 +11,7 @@ export type Section = {
   blocks: ContentBlock[];
   transition: TransitionType;
   colorText?: string; // overridar theme.colorText för denna sektion
+  minHeight?: number; // min-höjd i vh-enheter, standard 150
 };
 
 export type BackgroundLayer =

@@ -173,6 +173,33 @@ export function SectionEditor({ section, dispatch }: Props) {
         )}
       </div>
 
+      {/* Sektionshöjd */}
+      <div className={styles.field}>
+        <label className={styles.fieldLabel}>Sektionshöjd</label>
+        <div className={styles.heightRow}>
+          <span className={styles.heightValue}>{section.minHeight ?? 150} vh</span>
+          {section.minHeight && section.minHeight !== 150 && (
+            <button
+              className={styles.resetColorBtn}
+              onClick={() => dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { minHeight: undefined } } })}
+              title="Återställ till standard (150vh)"
+            >↺ Standard</button>
+          )}
+        </div>
+        <input
+          type="range"
+          className={styles.heightSlider}
+          min={50}
+          max={300}
+          step={10}
+          value={section.minHeight ?? 150}
+          onChange={(e) => dispatch({ type: 'UPDATE_SECTION', payload: { sectionId: section.id, updates: { minHeight: parseInt(e.target.value) } } })}
+        />
+        <div className={styles.heightScale}>
+          <span>50</span><span>100</span><span>150</span><span>200</span><span>250</span><span>300 vh</span>
+        </div>
+      </div>
+
       {/* Övergång */}
       <div className={styles.field}>
         <label className={styles.fieldLabel}>Övergång till nästa sektion</label>
