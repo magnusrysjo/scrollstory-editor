@@ -26,6 +26,8 @@ function renderBlockInner(block: ContentBlock): string {
     if (block.style.color) inlineStyles.push(`color:${block.style.color}`);
     if (block.style.fontSize) inlineStyles.push(`font-size:${block.style.fontSize}rem`);
     if (block.style.lineHeight) inlineStyles.push(`line-height:${block.style.lineHeight}`);
+    if (block.style.bold !== undefined) inlineStyles.push(`font-weight:${block.style.bold ? 'bold' : 'normal'}`);
+    if (block.style.italic !== undefined) inlineStyles.push(`font-style:${block.style.italic ? 'italic' : 'normal'}`);
     const styleAttr = inlineStyles.length ? ` style="${inlineStyles.join(';')}"` : '';
     return `<${tag} class="${cls}"${styleAttr}>${escHtml(block.content)}</${tag}>`;
   }

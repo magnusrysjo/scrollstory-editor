@@ -67,6 +67,19 @@ export function BlockEditor({ block, sectionId, dispatch }: Props) {
                 {ALIGNMENT_LABELS[a as TextStyle['alignment']]}
               </button>
             ))}
+            <div className={styles.alignDivider} />
+            <button
+              className={`${styles.alignBtn} ${styles.boldBtn} ${block.style.bold ? styles.alignBtnActive : ''}`}
+              onClick={() => update({ style: { ...block.style, bold: !block.style.bold } })}
+              title="Fet stil">
+              B
+            </button>
+            <button
+              className={`${styles.alignBtn} ${styles.italicBtn} ${block.style.italic ? styles.alignBtnActive : ''}`}
+              onClick={() => update({ style: { ...block.style, italic: !block.style.italic } })}
+              title="Kursiv stil">
+              I
+            </button>
           </div>
         </div>
         <div className={styles.sizeRow}>

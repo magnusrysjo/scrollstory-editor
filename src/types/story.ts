@@ -43,6 +43,8 @@ export type TextStyle = {
   color?: string;
   fontSize?: number;    // rem-värde. Saknas = CSS-klassens standard.
   lineHeight?: number;  // t.ex. 1.4. Saknas = CSS-klassens standard.
+  bold?: boolean;       // overridar CSS-klassens font-weight
+  italic?: boolean;     // overridar CSS-klassens font-style
 };
 
 export type StoryTheme = {

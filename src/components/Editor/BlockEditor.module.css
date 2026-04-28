@@ -143,6 +143,24 @@
   color: #e8a838;
 }
 
+.alignDivider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  align-self: stretch;
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+
+.boldBtn {
+  font-weight: 700;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.italicBtn {
+  font-style: italic;
+  font-family: 'Georgia', serif;
+}
+
 .sizeRow {
   display: flex;
   flex-direction: column;

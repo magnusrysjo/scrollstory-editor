@@ -33,6 +33,8 @@ export function BlockRenderer({ block }: Props) {
     if (block.style.color) inlineStyle.color = block.style.color;
     if (typeof block.style.fontSize === 'number') inlineStyle.fontSize = `${block.style.fontSize}rem`;
     if (typeof block.style.lineHeight === 'number') inlineStyle.lineHeight = block.style.lineHeight;
+    if (block.style.bold !== undefined) inlineStyle.fontWeight = block.style.bold ? 'bold' : 'normal';
+    if (block.style.italic !== undefined) inlineStyle.fontStyle = block.style.italic ? 'italic' : 'normal';
     return (
       <div
         className={`${getTextClass(block.style.variant)} ${getAlignClass(block.style.alignment)}`}
